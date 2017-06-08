@@ -183,7 +183,7 @@ toneloke.uniq([1, 2, 1, 4, 1, 3]);
 
 ## Function
 
-**toneloke.bind (Bonus)**
+**toneloke.bind (bonus function)**
 
 `toneloke.bind(function, object, *arguments)`
 

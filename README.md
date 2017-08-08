@@ -17,7 +17,7 @@ The entire fi library should be wrapped in an [Immediately Invoked Function Expr
 ```javascript
 fi = (function() {
   return {
-    libraryMethod: function() {return 'Cache $, Raiders, JS, MongoDB and tacos rule!'}
+    libraryMethod: function() {return 'Start by reading https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0'}
   }
 })()
 

@@ -1,4 +1,4 @@
-# Build a JS library
+# Build a JS functional library
 
 ## Project guidelines
 Your assignment today is to build the `fi` JS library. This is a toolset of useful functional programming helpers, following the [functional programming](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0) paradigm.
@@ -8,6 +8,8 @@ Your functions should conform to the following guidelines:
 1. Write pure functions
 2. Avoid sharing or mutating state
 3. Avoid side effects
+
+Given the same input your functions should always return the same value.
 
 ## Instructions
 Below you will find a list of function descriptions detailing what their name, parameters and return value should be. Your job is to develop the code to implement these functions.
@@ -182,11 +184,9 @@ fi.uniq([1, 2, 1, 4, 1, 3]);
 
 **fi.bind (bonus function)**
 
-`fi.bind(function, object, *arguments)`
+`fi.bind(function, object)`
 
 Bind a **function** to an **object**, meaning that whenever the function is called, the value of _this_ will be the **object**.
-
-Optionally, pass **arguments** to the **function** to pre-fill them, also known as **partial application**.
 
 ```javascript
 var func = function(greeting){ return greeting + ': ' + this.name };
@@ -225,10 +225,9 @@ fi.values({one: 1, two: 2, three: 3});
 Returns a sorted list of the names of every method in an object — that is to say, the name of every function property of the object.
 
 ```javascript
-functionsList = ["bindAll", "all", "clone", "compose", "any", "bind", "compact"]
 
-fi.functions(functionsList);
-=> ["all", "any", "bind", "bindAll", "clone", "compact", "compose"]
+fi.functions(fi);
+=> ["compact", "each", "filter", "find", "first", "functions", "last", "map", "reduce", "size", "sortBy"]
 ```
 
 **fi.giveMeMore**

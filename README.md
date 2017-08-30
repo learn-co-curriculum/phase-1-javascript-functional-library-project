@@ -20,8 +20,9 @@ The entire fi library should be wrapped in an [Immediately Invoked Function Expr
 fi = (function() {
   return {
     libraryMethod: function() {
-    return 'Start by reading https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-  programming-7f218c68b3a0'
+      return 'Start by reading https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-  programming-7f218c68b3a0'
     },
+    
     each: function() {/*TODO*/},
   }
 })()

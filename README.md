@@ -16,6 +16,7 @@ Below you will find a list of function descriptions detailing what their name, p
 
 The entire fi library should be wrapped in an [Immediately Invoked Function Expression](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) (IIFE), like the example below.
 
+
 ```javascript
 fi = (function() {
   return {
@@ -29,6 +30,8 @@ fi = (function() {
 
 fi.libraryMethod()
 ```
+
+More info on the [Module Pattern](https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript)
 
 ## Collection Functions (Arrays or Objects)
 
@@ -91,7 +94,8 @@ var even = fi.find([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
 
 Looks through each value in the **list**, returning an array of all the values that pass a truth test (**predicate**).
 
-```javascriptvar evens = fi.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
+```javascript
+var evens = fi.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
 => [2, 4, 6]
 ```
 

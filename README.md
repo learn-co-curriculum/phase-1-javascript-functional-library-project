@@ -99,22 +99,6 @@ var evens = fi.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; })
 => [2, 4, 6]
 ```
 
-**fi.sortBy**
-
-`fi.sortBy(list, iteratee, [context])`
-
-Returns a sorted copy of **list**, ranked in ascending order by the results of running each value through **iteratee**. iteratee may also be the string name of the property to sort by (eg. length).
-
-```javascript
-fi.sortBy([1, 2, 3, 4, 5, 6], function(num){ return Math.sin(num); });
-=> [5, 4, 6, 3, 1, 2]
-
-
-var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
-fi.sortBy(stooges, 'name');
-=> [{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}];
-```
-
 **fi.size**
 
 `fi.size(list)`
@@ -161,6 +145,26 @@ Returns a copy of the **array** with all falsy values removed. In JavaScript, _f
 fi.compact([0, 1, false, 2, '', 3]);
 => [1, 2, 3]
 ```
+
+**fi.sortBy**
+
+`fi.sortBy(array, iteratee, [context])`
+
+Returns a sorted copy of **array**, ranked in ascending order by the results of running each value through **iteratee**.
+*The point of this exercise is not to write your own sorting algorithm and you are free to use the native [JS sort](https://www.w3schools.com/js/js_array_sort.asp)*
+
+*If you would like to go deeper and try to construct your own sorting algortithm this is a great extension. [Here](http://blog.benoitvallon.com/sorting-algorithms-in-javascript/sorting-algorithms-in-javascript-all-the-code/) is a list of sorting algorithms implemented in JS with additional resources *
+
+```javascript
+fi.sortBy([1, 2, 3, 4, 5, 6], function(num){ return Math.sin(num); });
+=> [5, 4, 6, 3, 1, 2]
+
+
+var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
+fi.sortBy(stooges, function(stooge){ return stooge.name});
+=> [{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}];
+```
+
 
 **fi.flatten (bonus function)**
 

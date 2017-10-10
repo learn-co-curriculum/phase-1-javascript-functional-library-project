@@ -240,4 +240,4 @@ fi.functions(fi);
 
 **fi.giveMeMore**
 
-If you are reading this come to use for more functions assignments.
+If you are reading this come to us for more functions assignments.

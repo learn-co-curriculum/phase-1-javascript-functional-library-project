@@ -33,6 +33,8 @@ fi.libraryMethod()
 
 More info on the [Module Pattern](https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript)
 
+The point of this exercise is to build your own implementation of [Higher Order Functions] using lower level building blocks of the JavaScript language. So, your implementation of `map` should not use the native JavaScript `map`. Your version should use a `for` loop, `while` loop, or `for in` loop to produce the functionality described.
+
 ## Collection Functions (Arrays or Objects)
 
 **fi.each**

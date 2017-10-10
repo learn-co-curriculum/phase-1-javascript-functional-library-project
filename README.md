@@ -39,9 +39,9 @@ The point of this exercise is to build your own implementation of [Higher Order 
 
 **fi.each**
 
-`fi.each(list, iteratee, [context])`
+`fi.each(list, iteratee)`
 
-Iterates over a **list** of elements, yielding each in turn to an **iteratee** function. The **iteratee** is bound to the **context** object, if one is passed. Each invocation of **iteratee** is called with three arguments: (element, index, list). If **list** is a JavaScript object, **iteratee**'s arguments will be (value, key, list). **Returns the original list for chaining.**
+Iterates over a **list** of elements, yielding each in turn to an **iteratee** function. Each invocation of **iteratee** is called with three arguments: (element, index, list). If **list** is a JavaScript object, **iteratee**'s arguments will be (value, key, list). **Returns the original list for chaining.**
 
 ```javascript
 fi.each([1, 2, 3], alert);
@@ -53,7 +53,7 @@ fi.each({one: 1, two: 2, three: 3}, alert);
 
 **fi.map**
 
-`fi.map(list, iteratee, [context])`
+`fi.map(list, iteratee)`
 
 
 Produces a new array of values by mapping each value in **list** through a transformation function (**iteratee**). The iteratee is passed three arguments: the value, then the index (or key) of the iteration, and finally a reference to the entire list. **Returns the modified list for chaining.**
@@ -67,7 +67,7 @@ fi.map({one: 1, two: 2, three: 3}, function(num, key){ return num * 3; });
 
 **fi.reduce**
 
-`fi.reduce(list, iteratee, [memo], [context])`
+`fi.reduce(list, iteratee, [memo])`
 
 Reduce boils down a **list** of values into a single value. **Memo** is the initial state of the reduction, and each successive step of it should be returned by the **iteratee**. The iteratee is passed four arguments: the memo, then the value and index (or key) of the iteration, and finally a reference to the entire list.
 
@@ -81,7 +81,7 @@ var sum = fi.reduce([1, 2, 3], function(memo, num){ return memo + num; }, 0);
 
 **fi.find**
 
-`fi.find(list, predicate, [context])`
+`fi.find(list, predicate)`
 
 Looks through each value in the **list**, returning the first one that passes a truth test (**predicate**), or undefined if no value passes the test. The function returns as soon as it finds an acceptable element, and doesn't traverse the entire list.
 
@@ -92,7 +92,7 @@ var even = fi.find([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
 
 **fi.filter**
 
-`fi.filter(list, predicate, [context])`
+`fi.filter(list, predicate)`
 
 Looks through each value in the **list**, returning an array of all the values that pass a truth test (**predicate**).
 
@@ -150,7 +150,7 @@ fi.compact([0, 1, false, 2, '', 3]);
 
 **fi.sortBy**
 
-`fi.sortBy(array, iteratee, [context])`
+`fi.sortBy(array, iteratee)`
 
 Returns a sorted copy of **array**, ranked in ascending order by the results of running each value through **iteratee**.
 *The point of this exercise is not to write your own sorting algorithm and you are free to use the native [JS sort](https://www.w3schools.com/js/js_array_sort.asp)*
@@ -195,19 +195,6 @@ fi.uniq([1, 2, 1, 4, 1, 3]);
 ```
 
 ## Function
-
-**fi.bind (bonus function)**
-
-`fi.bind(function, object)`
-
-Bind a **function** to an **object**, meaning that whenever the function is called, the value of _this_ will be the **object**.
-
-```javascript
-var func = function(greeting){ return greeting + ': ' + this.name };
-func = fi.bind(func, {name: 'moe'}, 'hi');
-func();
-=> 'hi: moe'
-```
 
 ## Object Functions
 

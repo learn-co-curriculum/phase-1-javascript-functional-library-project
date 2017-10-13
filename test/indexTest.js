@@ -27,7 +27,7 @@ describe('index.js', function () {
       assertAlerts(testArr, alert)
     })
 
-    it('calls alert properly on the values only and returns the original collection', function () {
+    it('calls alert properly on object values and returns the original collection', function () {
       const result = fi.each(testObj, alert)
       assertAlerts(testObj, alert)
       const objMutated = JSON.stringify(testObj) !== JSON.stringify(result)
@@ -36,19 +36,44 @@ describe('index.js', function () {
   })
 
   describe('map', function () {
-    const testArr = [1, 2, 3, 4]
-    const testObj = {one: 1, two: 2, three: 3, four: 4}
+    const unmodifiedTestArr = [1, 2, 3, 4]
+    const testArr = unmodifiedTestArr.slice()
+    const callBack = (x) => (x * 3)
 
-    it('makes the function work', function () {
-      const result = fi.map(testArr)
-      expect(arraysEqual(testArr, result)).to.equal(true);
+    const arrResult = fi.map(testArr, callBack)
+
+    it('successfully returns a correctly populated array', function () {
+      expect(arraysEqual([3, 6, 9, 12], arrResult)).to.equal(true);
+    })
+
+    it('does not modify the original array', function () {
+      expect(arraysEqual(testArr, unmodifiedTestArr)).to.equal(true);
+    })
+
+    const unmodifiedTestObj = {one: 1, two: 2, three: 3, four: 4}
+    const testObj = Object.assign({}, {one: 1, two: 2, three: 3, four: 4})
+    const objResult = fi.map(testObj, callBack)
+
+    it('successfully returns a correctly populated array from modified object values', function () {
+      expect(arraysEqual([3, 6, 9, 12], objResult)).to.equal(true);
+    })
+
+    it('does not modify the original object', function () {
+      const objMutated = JSON.stringify(testObj) !== JSON.stringify(unmodifiedTestObj)
+      expect(objMutated).to.equal(false)
     })
   })
 
   describe('reduce', function () {
-    it('makes the function work', function () {
+    const unmodifiedTestArr = [1, 2, 3, 4]
+    const testArr = unmodifiedTestArr.slice()
+    const callBack = (x) => (x * 3)
 
+
+    it('makes the function work', function () {
+      
     })
+
   })
 
   describe('find', function () {

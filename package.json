@@ -1,0 +1,32 @@
+{
+  "name": "js-functional-library-project",
+  "version": "0.1.0",
+  "description": "Writing built in vanilla JavaScript functions",
+  "main": "src/index.js",
+  "scripts": {
+    "postinstall": "gem install learn-co",
+    "test": "node_modules/browser-sync/bin/browser-sync.js start --config node_modules/learn-browser/bs-config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/learn-co-curriculum/js-functional-library-project.git"
+  },
+  "keywords": [
+    "learn",
+    "flatiron school",
+    "javascript",
+    "functional programming",
+    "callbacks",
+    "project",
+    "lab"
+  ],
+  "author": "Flatiron School and Friends",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/learn-co-curriculum/js-functional-library-project/issues"
+  },
+  "homepage": "https://github.com/learn-co-curriculum/js-functional-library-project#readme",
+  "devDependencies": {
+    "learn-browser": "^0.1.13"
+  }
+}

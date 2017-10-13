@@ -23,7 +23,7 @@ fi = (function() {
     libraryMethod: function() {
       return 'Start by reading https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0'
     },
-    
+
     each: function() {/*TODO*/},
   }
 })()
@@ -39,24 +39,24 @@ The point of this exercise is to build your own implementation of [Higher Order 
 
 **fi.each**
 
-`fi.each(list, iteratee)`
+`fi.each(collection, iteratee)`
 
-Iterates over a **list** of elements, yielding each in turn to an **iteratee** function. Each invocation of **iteratee** is called with three arguments: (element, index, list). If **list** is a JavaScript object, **iteratee**'s arguments will be (value, key, list). **Returns the original list for chaining.**
+Iterates over a **collection** of elements, yielding each in turn to an **iteratee** function. Each invocation of **iteratee** is called with three arguments: (element, index, collection). If **collection** is a JavaScript object, **iteratee**'s arguments will be (value, key, collection). **Returns the original collection for chaining.**
 
 ```javascript
 fi.each([1, 2, 3], alert);
-=> alerts each number in turn and returns the original list
+=> alerts each number in turn and returns the original collection
 fi.each({one: 1, two: 2, three: 3}, alert);
-=> alerts each number value in turn and returns the original list
+=> alerts each number value in turn and returns the original collection
 ```
 
 
 **fi.map**
 
-`fi.map(list, iteratee)`
+`fi.map(collection, iteratee)`
 
 
-Produces a new array of values by mapping each value in **list** through a transformation function (**iteratee**). The iteratee is passed three arguments: the value, then the index (or key) of the iteration, and finally a reference to the entire list. **Returns the modified list for chaining.**
+Produces a new array of values by mapping each value in **collection** through a transformation function (**iteratee**). The iteratee is passed three arguments: the value, then the index (or key) of the iteration, and finally a reference to the entire collection. **Returns the modified collection for chaining.**
 
 ```javascript
 fi.map([1, 2, 3], function(num){ return num * 3; });
@@ -67,11 +67,11 @@ fi.map({one: 1, two: 2, three: 3}, function(num, key){ return num * 3; });
 
 **fi.reduce**
 
-`fi.reduce(list, iteratee, [memo])`
+`fi.reduce(collection, iteratee, [memo])`
 
-Reduce boils down a **list** of values into a single value. **Memo** is the initial state of the reduction, and each successive step of it should be returned by the **iteratee**. The iteratee is passed four arguments: the memo, then the value and index (or key) of the iteration, and finally a reference to the entire list.
+Reduce boils down a **collection** of values into a single value. **Memo** is the initial state of the reduction, and each successive step of it should be returned by the **iteratee**. The iteratee is passed four arguments: the memo, then the value and index (or key) of the iteration, and finally a reference to the entire collection.
 
-If no memo is passed to the initial invocation of reduce, the iteratee is not invoked on the first element of the list. The first element is instead passed as the memo in the invocation of the iteratee on the next element in the list.
+If no memo is passed to the initial invocation of reduce, the iteratee is not invoked on the first element of the collection. The first element is instead passed as the memo in the invocation of the iteratee on the next element in the collection.
 
 ```javascript
 var sum = fi.reduce([1, 2, 3], function(memo, num){ return memo + num; }, 0);
@@ -81,9 +81,9 @@ var sum = fi.reduce([1, 2, 3], function(memo, num){ return memo + num; }, 0);
 
 **fi.find**
 
-`fi.find(list, predicate)`
+`fi.find(collection, predicate)`
 
-Looks through each value in the **list**, returning the first one that passes a truth test (**predicate**), or undefined if no value passes the test. The function returns as soon as it finds an acceptable element, and doesn't traverse the entire list.
+Looks through each value in the **collection**, returning the first one that passes a truth test (**predicate**), or undefined if no value passes the test. The function returns as soon as it finds an acceptable element, and doesn't traverse the entire collection.
 
 ```javascript
 var even = fi.find([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
@@ -92,9 +92,9 @@ var even = fi.find([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
 
 **fi.filter**
 
-`fi.filter(list, predicate)`
+`fi.filter(collection, predicate)`
 
-Looks through each value in the **list**, returning an array of all the values that pass a truth test (**predicate**).
+Looks through each value in the **collection**, returning an array of all the values that pass a truth test (**predicate**).
 
 ```javascript
 var evens = fi.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
@@ -103,9 +103,9 @@ var evens = fi.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; })
 
 **fi.size**
 
-`fi.size(list)`
+`fi.size(collection)`
 
-Return the number of values in the **list**.
+Return the number of values in the **collection**.
 
 ```javascript
 fi.size({one: 1, two: 2, three: 3});
@@ -223,7 +223,7 @@ fi.values({one: 1, two: 2, three: 3});
 
 `fi.functions(object)`
 
-Returns a sorted list of the names of every method in an object — that is to say, the name of every function property of the object.
+Returns a sorted collection of the names of every method in an object — that is to say, the name of every function property of the object.
 
 ```javascript
 

@@ -56,7 +56,7 @@ fi.each({one: 1, two: 2, three: 3}, alert);
 `fi.map(collection, iteratee)`
 
 
-Produces a new array of values by mapping each value in **collection** through a transformation function (**iteratee**). The iteratee is passed three arguments: the value, then the index (or key) of the iteration, and finally a reference to the entire collection. **Returns the modified collection for chaining.**
+Produces a new array of values by mapping each value in **collection** through a transformation function (**iteratee**). The iteratee is passed three arguments: the value, then the index (or key) of the iteration, and finally a reference to the entire collection. **Returns a new collection for chaining without modifying the original.**
 
 ```javascript
 fi.map([1, 2, 3], function(num){ return num * 3; });

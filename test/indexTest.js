@@ -1,6 +1,15 @@
 const expect = chai.expect
 var sinon = require('sinon');
 
+function arraysEqual(arrA, arrB) {
+  if (arrA.length !== arrB.length) return false
+  for (let idx = 0; idx < arrA.length; idx++) {
+    if (arrA[idx] !== arrB[idx])
+      return false
+  }
+  return true
+}
+
 describe('index.js', function () {
 
   describe('each', function () {
@@ -20,15 +29,19 @@ describe('index.js', function () {
 
     it('calls alert properly on the values only and returns the original collection', function () {
       const result = fi.each(testObj, alert)
-      expect(alert).to.have.been.called.exactly(4);
-      for (let i = 0; i < result.length; i++)
-        expect(alert).to.have.been.called.with(i);
+      assertAlerts(testObj, alert)
+      const objMutated = JSON.stringify(testObj) !== JSON.stringify(result)
+      expect(objMutated).to.equal(false)
     })
   })
 
   describe('map', function () {
-    it('makes the function work', function () {
+    const testArr = [1, 2, 3, 4]
+    const testObj = {one: 1, two: 2, three: 3, four: 4}
 
+    it('makes the function work', function () {
+      const result = fi.map(testArr)
+      expect(arraysEqual(testArr, result)).to.equal(true);
     })
   })
 

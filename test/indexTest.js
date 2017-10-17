@@ -19,8 +19,7 @@ describe('index.js', function () {
     it('calls alert properly on object values and returns the original collection', function () {
       const result = fi.each(testObj, alert)
       assertAlerts(testObj, alert)
-      const objMutated = JSON.stringify(testObj) !== JSON.stringify(result)
-      expect(objMutated).to.equal(false)
+      expect(objectsEqual(testObj, result)).to.equal(false)
     })
   })
 
@@ -46,8 +45,7 @@ describe('index.js', function () {
     })
 
     it('does not modify the original object', function () {
-      const objMutated = JSON.stringify(testObj) !== JSON.stringify(unmodifiedTestObj)
-      expect(objMutated).to.equal(false)
+      expect(objectsEqual(testObj, unmodifiedTestObj)).to.equal(false)
     })
   })
 
@@ -158,55 +156,147 @@ describe('index.js', function () {
     const nonsenseArr = [1, 0, 'a', "", "maru", null, "choux", NaN, false, "doge", undefined]
     const justOkArr = [1, 'a', "maru", "choux", "doge"]
 
-    it('Returns a copy of the **array** with all falsy values removed. In JavaScript, _false_, _null_, _0_, _""_, _undefined_ and _NaN_ are all falsy.', function () {
+    it('returns a copy of the **array** with all falsy values removed. In JavaScript, _false_, _null_, _0_, _""_, _undefined_ and _NaN_ are all falsy.', function () {
       expect(arraysEqual(fi.compact(nonsenseArr), justOkArr)).to.equal(true)
     })
 
-    it('Does not modify the original array', function () {
+    it('does not modify the original array', function () {
       fi.compact(nonsenseArr)
       expect(arraysEqual(nonsenseArr, [1, 0, 'a', "", "maru", null, "choux", NaN, false, "doge", undefined])).to.equal(true)
     })
   })
 
   describe('sortBy', function () {
-    it('makes the function work', function () {
-      
+    const unsortedIntArr = [3, 8, 5, 1, 9, 11, 8]
+    const unsortedStringArr = ["maru", "choux", "doge", "coconut"]
+    const unsortedObjArr = [
+      {name: "dennis", age: 29},
+      {name: "dee", age: 40},
+      {name: "mac", age: 34},
+      {name: "charlie", age: 32},
+      {name: "frank", age: 72}
+    ]
+    const controlSortedObjArr = [
+      {name: "dennis", age: 29},
+      {name: "charlie", age: 32},
+      {name: "mac", age: 34},
+      {name: "dee", age: 40},
+      {name: "frank", age: 72}
+    ]
+
+    function sortArrFunction(val) {
+      return val
+    }
+
+    function sortIntsBySin(val) {
+      Math.sin(val)
+    }
+
+    function sortObjFunction(obj) {
+      return obj.age
+    }
+
+    it('correctly sorts arrays of integers and arrays of strings', function () {
+      expect(arraysEqual(fi.sortBy(unsortedIntArr, sortArrFunction), [1, 3, 5, 8, 8, 9, 11])).to.equal(true)
+      expect(arraysEqual(fi.sortBy(unsortedStringArr, sortArrFunction), ["choux", "coconut", "doge", "maru"])).to.equal(true)
+    })
+
+    it('does not modify the original arrays', function () {
+      fi.sortBy(unsortedIntArr, sortArrFunction)
+      fi.sortBy(unsortedStringArr, sortArrFunction)
+      expect(arraysEqual(unsortedIntArr, [3, 8, 5, 1, 9, 11, 8])).to.equal(true)
+      expect(arraysEqual(unsortedStringArr, ["maru", "choux", "doge", "coconut"])).to.equal(true)
+    })
+
+    it('correctly sorts arrays of integers with non-standard sort', function () {
+      expect(arraysEqual(fi.sortBy([1, 2, 3, 4, 5, 6], sortIntsBySin), [5, 4, 6, 3, 1, 2])).to.equal(true)
+    })
+
+    it('correctly sorts arrays of objects', function () {
+      const sortedObjArr = fi.sortBy(unsortedObjArr, sortObjFunction)
+      expect(objectsEqual(sortedObjArr, controlSortedObjArr)).to.equal(true)
     })
   })
 
   describe('flatten', function () {
-    it('makes the function work', function () {
 
+    it('correctly flattens a ludicrously nested array', function () {
+      const nestedArr = [1, [2, 3], [[4, 5], 6, [7, [8, 9]]]]
+      const flatArr = fi.flatten(nestedArr)
+      expect(arraysEqual(flatArr, [1, 2, 3, 4, 5, 6, 7, 8, 9])).to.equal(true)
     })
+
+    it('correctly flattens a single level when a second argument of "true" is passed', function () {
+      const nestedArr = [1, [2, 3], [[4, 5], 6, [7, [8, 9]]]]
+      const flatArr = fi.flatten(nestedArr, true)
+      expect(arraysEqual(flatArr, [1, 2, 3, [4, 5], 6, [7, [8, 9]]])).to.equal(true)
+    })
+
   })
 
   describe('uniq', function () {
-    it('makes the function work', function () {
+    const objA = {a: 1, b: 2}
+    const objB = objA
+    const objC = {c: 3, d: 4}
 
+    it('removes duplicate values from an array', function () {
+      expect(arraysEqual(fi.uniq([1, 1, 2, 3, 2, 4, 5, 6, 1]), [1, 2, 3, 4, 5, 6]).to.equal(true)
+      expect(arraysEqual(fi.uniq([objA, objC, objB]), [objA, objC]).to.equal(true)
     })
+
+    it('removes duplicate values from an array when an iteratee is applied', function () {
+      const newArr = fi.uniq([1, 2, 2, 3, 4, 6, 9], false, ((val) => ((val % 3) === 0 ? (val / 3) : val)))
+      expect(arraysEqual(newArr, [1, 2, 3, 4]).to.equal(true)
+    })
+
+    it('runs materially quicker when run on a pre-sorted array', function () {
+      const unsortedTime = bench(fi.uniq, 3, [largeUnsortedArr, false], this)
+      const sortedTime = bench(fi.uniq, 3, [largeSortedArr, true], this)
+      // TODO MAKE SURE THIS IS WORKING
+      console.error("unsorted time: ", unsortedTime)
+      console.error("sorted time: ", sortedTime)
+      const handicappedSortedTime = sortedTime + (sortedTime * .2)
+      expect(handicappedSortedTime < sortedTime).to.equal(true)
+    })
+
   })
 
   describe('keys', function () {
-    it('makes the function work', function () {
+    const testObj = Object.assign({}, unmodifiedTestObj)
 
+    it("retrieves all the names of the object's own enumerable properties", function () {
+      expect(arraysEqual(fi.keys(testObj), Object.keys(unmodifiedTestObj))).to.equal(true)
     })
+
+    it("does not modify the original object you crazy DOGE!", function () {
+      expect(objectsEqual(testObj, unmodifiedTestObj)).to.equal(true)
+    })
+
   })
 
   describe('values', function () {
-    it('makes the function work', function () {
+    const testObj = Object.assign({}, unmodifiedTestObj)
 
+    it("retrieves all the values of the object's own properties", function () {
+      expect(arraysEqual(fi.keys(testObj), Object.values(unmodifiedTestObj))).to.equal(true)
+    })
+
+    it("does not modify the original object you crazy DOGE!", function () {
+      expect(objectsEqual(testObj, unmodifiedTestObj)).to.equal(true)
     })
   })
 
   describe('functions', function () {
-    it('makes the function work', function () {
+    const mathMethods = Object.getOwnPropertyNames(Math)
 
+    it('makes the function work', function () {
+      expect(arraysEqual(fi.functions(Math), mathMethods)).to.equal(true)
     })
   })
 
   describe('giveMeMore', function () {
-    it('makes the function work', function () {
-
+    it('come get more things to do from an instructor', function () {
+      expect(false).to.equal(true)
     })
   })
 

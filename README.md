@@ -176,7 +176,7 @@ fi.sortBy(stooges, function(stooge){ return stooge.name});
 `fi.flatten(array, [shallow])`
 Flattens a nested **array** (the nesting can be to any depth).
 
-If you pass **shallow**, the array will only be flattened a single level.
+If you pass **true** for the second argument, the array will only be flattened a single level.
 
 ```javascript
 fi.flatten([1, [2], [3, [[4]]]]);

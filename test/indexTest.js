@@ -131,26 +131,46 @@ describe('index.js', function () {
   })
 
   describe('first', function () {
-    it('makes the function work', function () {
-      
+    const testArr = unmodifiedTestArr.slice()
+
+    it('returns the first element of the collection', function () {
+      expect(fi.first(testArr)).to.equal(1)
+    })
+
+    it('returns the first n elements of the collection when the second optional argument (n) is provided', function () {
+      expect(arraysEqual(fi.first(testArr, 3), [1, 2, 3]).to.equal(true)
     })
   })
 
   describe('last', function () {
-    it('makes the function work', function () {
+    const testArr = unmodifiedTestArr.slice()
 
+    it('returns the last element of the collection', function () {
+      expect(fi.last(testArr)).to.equal(4)
+    })
+
+    it('returns the last n elements of the collection when the second optional argument (n) is provided', function () {
+      expect(arraysEqual(fi.last(testArr, 3), [2, 3, 4])).to.equal(true)
     })
   })
 
   describe('compact', function () {
-    it('makes the function work', function () {
+    const nonsenseArr = [1, 0, 'a', "", "maru", null, "choux", NaN, false, "doge", undefined]
+    const justOkArr = [1, 'a', "maru", "choux", "doge"]
 
+    it('Returns a copy of the **array** with all falsy values removed. In JavaScript, _false_, _null_, _0_, _""_, _undefined_ and _NaN_ are all falsy.', function () {
+      expect(arraysEqual(fi.compact(nonsenseArr), justOkArr)).to.equal(true)
+    })
+
+    it('Does not modify the original array', function () {
+      fi.compact(nonsenseArr)
+      expect(arraysEqual(nonsenseArr, [1, 0, 'a', "", "maru", null, "choux", NaN, false, "doge", undefined])).to.equal(true)
     })
   })
 
   describe('sortBy', function () {
     it('makes the function work', function () {
-
+      
     })
   })
 

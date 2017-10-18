@@ -69,9 +69,9 @@ fi.map({one: 1, two: 2, three: 3}, function(num, key){ return num * 3; });
 
 `fi.reduce(collection, iteratee, [acc])`
 
-Reduce boils down a **collection** of values into a single value. **Acc** (short for accumulator) is the initial state of the reduction, and each successive step of it should be returned by the **iteratee**. The iteratee is passed four arguments: the acc, then the value and index (or key) of the iteration, and finally a reference to the entire collection.
+Reduce boils down a **collection** of values into a single value. **Acc** (short for accumulator) is the initial state of the reduction, and each successive step of it should be returned by the **iteratee**. The iteratee is passed three arguments: the acc, the value of the iteration, and finally a reference to the entire collection.
 
-If no acc is passed to the initial invocation of reduce, the iteratee is not invoked on the first element of the collection. The first element is instead passed as the acc in the invocation of the iteratee on the next element in the collection.
+If no acc is passed to the initial invocation of reduce, the accumulator should be set to the first iteratee processed value of the collection.
 
 ```javascript
 var sum = fi.reduce([1, 2, 3], function(acc, num){ return acc + num; }, 0);
@@ -237,3 +237,4 @@ fi.functions(fi);
 **fi.giveMeMore**
 
 If you are reading this come to us for more functions assignments.
+`

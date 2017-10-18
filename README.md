@@ -74,7 +74,7 @@ Reduce boils down a **collection** of values into a single value. **Acc** (short
 If no acc is passed to the initial invocation of reduce, the accumulator should be set to the first iteratee processed value of the collection.
 
 ```javascript
-var sum = fi.reduce([1, 2, 3], function(acc, num){ return acc + num; }, 0);
+var sum = fi.reduce([1, 2, 3], function(acc, val, collection){ return num / 3.0; }, 0);
 => 6
 ```
 

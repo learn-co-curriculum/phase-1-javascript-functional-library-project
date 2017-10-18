@@ -58,10 +58,6 @@ describe('index.js', function () {
     const reduceSansAcc = fi.reduce(testArr, callback)
     const reduceWithAcc = fi.reduce(testArr, callback, 10)
 
-    it('returns the correct reduced value when not passed an accumulator', function () {
-      expect(reduceSansAcc).to.equal(30)
-    })
-
     it('returns the correct reduced value when passed an accumulator', function () {
       expect(reduceWithAcc).to.equal(40)
     })

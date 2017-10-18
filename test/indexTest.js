@@ -271,7 +271,7 @@ describe('index.js', function () {
     const testObj = Object.assign({}, unmodifiedTestObj)
 
     it("retrieves all the values of the object's own properties", function () {
-      expect(arraysEqual(fi.keys(testObj), Object.values(unmodifiedTestObj))).to.equal(true)
+      expect(arraysEqual(fi.values(testObj), Object.values(unmodifiedTestObj))).to.equal(true)
     })
 
     it("does not modify the original object you crazy DOGE!", function () {

@@ -54,7 +54,7 @@ describe('index.js', function () {
 
   describe('reduce', function () {
     const testArr = unmodifiedTestArr.slice() // arr is [1, 2, 3, 4]
-    const callback = (acc, val, collection) => (val * 3) // modified values are [3, 6, 9, 12]
+    const callback = (acc, val, collection) => (acc + (val * 3)
     const reduceSansAcc = fi.reduce(testArr, callback)
     const reduceWithAcc = fi.reduce(testArr, callback, 10)
 

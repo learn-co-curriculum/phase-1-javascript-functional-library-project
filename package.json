@@ -28,5 +28,8 @@
   "homepage": "https://github.com/learn-co-curriculum/js-functional-library-project#readme",
   "devDependencies": {
     "learn-browser": "^0.1.13"
+  },
+  "dependencies": {
+    "chai-spies-next": "^0.9.3"
   }
 }

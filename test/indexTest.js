@@ -1,5 +1,4 @@
 const expect = chai.expect
-var sinon = require('sinon');
 
 describe('index.js', function () {
   const unmodifiedTestArr = [1, 2, 3, 4]
@@ -7,19 +6,23 @@ describe('index.js', function () {
 
 
   describe('each', function () {
-    const alert = sinon.spy();
+    const alert = chai.spy();
     const testArr = [1, 2, 3, 4]
     const testObj = Object.assign({}, unmodifiedTestObj)
 
     it('calls alert with each element passed', function () {
       fi.each(testArr, alert)
-      expect(func).to.have.been.called.exactly(testArr.length)
+      expect(alert).to.have.been.called.exactly(testArr.length)
     })
 
     it('calls alert properly on object values and returns the original collection', function () {
-      const result = fi.each(testObj, alert)
-      assertAlerts(testObj, alert)
-      expect(objectsEqual(testObj, result)).to.equal(false)
+      function spyWithOneArg(x) {return true}
+      var spy = chai.spy(spyWithOneArg);
+      const result = fi.each(testObj, spy)
+      const objValues = Object.values(testObj)
+      objValues.forEach((val) => { expect(spy).to.have.been.called.with(val) })
+      expect(testObj === result).to.equal(true)
+      expect(objectsEqual(testObj, result)).to.equal(true)
     })
   })
 
@@ -45,23 +48,22 @@ describe('index.js', function () {
     })
 
     it('does not modify the original object', function () {
-      expect(objectsEqual(testObj, unmodifiedTestObj)).to.equal(false)
+      expect(objectsEqual(testObj, unmodifiedTestObj)).to.equal(true)
     })
   })
 
   describe('reduce', function () {
-    const testArr = unmodifiedTestArr.slice()
-    const callback = (x) => (x * 3)
-
+    const testArr = unmodifiedTestArr.slice() // arr is [1, 2, 3, 4]
+    const callback = (acc, val, collection) => (val * 3) // modified values are [3, 6, 9, 12]
     const reduceSansAcc = fi.reduce(testArr, callback)
     const reduceWithAcc = fi.reduce(testArr, callback, 10)
 
     it('returns the correct reduced value when not passed an accumulator', function () {
-      expect(reduceSansAcc).to.equal(10)
+      expect(reduceSansAcc).to.equal(30)
     })
 
     it('returns the correct reduced value when passed an accumulator', function () {
-      expect(reduceWithAcc).to.equal(20)
+      expect(reduceWithAcc).to.equal(40)
     })
 
     it('does not modify the original array', function () {
@@ -88,16 +90,15 @@ describe('index.js', function () {
     })
 
     it('does not traverse the whole array if the value is found early', function () {
-      const watchedCB = findCBGenerator(0)
-      sinon.spy(watchedCB)
-      fi.find(intArr, watchedCB)
-      expect(watchedCB).to.have.been.called.exactly(3)
+      const spy = chai.spy(findCBGenerator(0))
+      fi.find(intArr, spy)
+      expect(spy).to.have.been.called.exactly(3)
     })
 
     it('returns false if the value is not present', function () {
-      expect(fi.find(intArr, findCBGen(7))).to.equal(false)
-      expect(fi.find(strArr, findCBGen("maxwellisbestmax"))).to.equal(false)
-      expect(fi.find(objArr, findCBGen({c: 'c'}))).to.equal(false)
+      expect(fi.find(intArr, findCBGenerator(7))).to.equal(false)
+      expect(fi.find(strArr, findCBGenerator("maxwellisbestmax"))).to.equal(false)
+      expect(fi.find(objArr, findCBGenerator({c: 'c'}))).to.equal(false)
     })
 
   })
@@ -136,7 +137,7 @@ describe('index.js', function () {
     })
 
     it('returns the first n elements of the collection when the second optional argument (n) is provided', function () {
-      expect(arraysEqual(fi.first(testArr, 3), [1, 2, 3]).to.equal(true)
+      expect(arraysEqual(fi.first(testArr, 3), [1, 2, 3])).to.equal(true)
     })
   })
 
@@ -240,23 +241,19 @@ describe('index.js', function () {
     const objC = {c: 3, d: 4}
 
     it('removes duplicate values from an array', function () {
-      expect(arraysEqual(fi.uniq([1, 1, 2, 3, 2, 4, 5, 6, 1]), [1, 2, 3, 4, 5, 6]).to.equal(true)
-      expect(arraysEqual(fi.uniq([objA, objC, objB]), [objA, objC]).to.equal(true)
+      expect(arraysEqual(fi.uniq([1, 1, 2, 3, 2, 4, 5, 6, 1]), [1, 2, 3, 4, 5, 6])).to.equal(true)
+      expect(arraysEqual(fi.uniq([objA, objC, objB]), [objA, objC])).to.equal(true)
     })
 
     it('removes duplicate values from an array when an iteratee is applied', function () {
       const newArr = fi.uniq([1, 2, 2, 3, 4, 6, 9], false, ((val) => ((val % 3) === 0 ? (val / 3) : val)))
-      expect(arraysEqual(newArr, [1, 2, 3, 4]).to.equal(true)
+      expect(arraysEqual(newArr, [1, 2, 3, 4])).to.equal(true)
     })
 
     it('runs materially quicker when run on a pre-sorted array', function () {
-      const unsortedTime = bench(fi.uniq, 3, [largeUnsortedArr, false], this)
-      const sortedTime = bench(fi.uniq, 3, [largeSortedArr, true], this)
-      // TODO MAKE SURE THIS IS WORKING
-      console.error("unsorted time: ", unsortedTime)
-      console.error("sorted time: ", sortedTime)
-      const handicappedSortedTime = sortedTime + (sortedTime * .2)
-      expect(handicappedSortedTime < sortedTime).to.equal(true)
+      const unsortedTime = bench(fi.uniq, 5, [largeUnsortedArr, false], this)
+      const sortedTime = bench(fi.uniq, 5, [largeSortedArr, true], this)
+      expect(sortedTime < (unsortedTime/2.0)).to.equal(true)
     })
 
   })
@@ -288,6 +285,7 @@ describe('index.js', function () {
 
   describe('functions', function () {
     const mathMethods = Object.getOwnPropertyNames(Math)
+    console.log(fi.functions(Math))
 
     it('makes the function work', function () {
       expect(arraysEqual(fi.functions(Math), mathMethods)).to.equal(true)

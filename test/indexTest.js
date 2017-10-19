@@ -54,13 +54,9 @@ describe('index.js', function () {
 
   describe('reduce', function () {
     const testArr = unmodifiedTestArr.slice() // arr is [1, 2, 3, 4]
-    const callback = (acc, val, collection) => (val * 3) // modified values are [3, 6, 9, 12]
+    const callback = (acc, val, collection) => (acc + (val * 3)
     const reduceSansAcc = fi.reduce(testArr, callback)
     const reduceWithAcc = fi.reduce(testArr, callback, 10)
-
-    it('returns the correct reduced value when not passed an accumulator', function () {
-      expect(reduceSansAcc).to.equal(30)
-    })
 
     it('returns the correct reduced value when passed an accumulator', function () {
       expect(reduceWithAcc).to.equal(40)
@@ -276,7 +272,7 @@ describe('index.js', function () {
     const testObj = Object.assign({}, unmodifiedTestObj)
 
     it("retrieves all the values of the object's own properties", function () {
-      expect(arraysEqual(fi.keys(testObj), Object.values(unmodifiedTestObj))).to.equal(true)
+      expect(arraysEqual(fi.values(testObj), Object.values(unmodifiedTestObj))).to.equal(true)
     })
 
     it("does not modify the original object you crazy DOGE!", function () {

@@ -1,8 +1,10 @@
 function arraysEqual(arrA, arrB) {
   if (arrA.length !== arrB.length) return false
   for (let idx = 0; idx < arrA.length; idx++) {
-    if (arrA[idx] !== arrB[idx])
+    if (arrA[idx] !== arrB[idx]) {
+      if (isNaN(arrA) && isNaN(arrB)) continue
       return false
+    }
   }
   return true
 }
@@ -22,37 +24,26 @@ function objectsEqual(objA, objB) {
  * @param {T} context the context to call the method in.
  * @return {number} the time it took, in milliseconds to execute.
  */
-var bench = function(method, iterations, args, context) {
-    var time = 0;
-    var timer = function (action) {
-        var d = Date.now();
-        if (time < 1 || action === 'start') {
-            time = d;
+
+function bench(method, iterations, args, context) {
+    var start = 0;
+    function timer(action) {
+        var currTime = Date.now();
+        if (action === 'start') {
+            start = currTime;
             return 0;
         } else if (action === 'stop') {
-            var t = d - time;
-            time = 0;
-            return t;
-        } else {
-            return d - time;
+            var elapsed = currTime - start;
+            start = 0;
+            return elapsed;
         }
     };
 
-    var result = [];
-    var i = 0;
-    timer('start');
-    while (i < iterations) {
-        result.push(method.apply(context, args));
-        i++;
-    }
-
-    var execTime = timer('stop');
-
-    if ( typeof console === "object") {
-        console.log("Mean execution time was: ", execTime / iterations);
-        console.log("Sum execution time was: ", execTime);
-        console.log("Result of the method call was:", result[0]);
-    }
-
-    return execTime / iterations;
+    timer('start')
+    for (let i = 0; i < iterations; i++)
+        method.apply(context, args)
+    var totalTime = timer('stop')
+    // console.log("Mean execution time was: ", totalTime / parseFloat(iterations));
+    // console.log("Sum execution time was: ", totalTime);
+    return totalTime / parseFloat(iterations);
 };

@@ -9,18 +9,21 @@ describe('index.js', function () {
     const alert = chai.spy();
     const testArr = [1, 2, 3, 4]
     const testObj = Object.assign({}, unmodifiedTestObj)
+    const spy = chai.spy(x => true)
 
     it('calls alert with each element passed', function () {
       fi.each(testArr, alert)
       expect(alert).to.have.been.called.exactly(testArr.length)
     })
 
-    it('calls alert properly on object values and returns the original collection', function () {
-      function spyWithOneArg(x) {return true}
-      var spy = chai.spy(spyWithOneArg);
-      const result = fi.each(testObj, spy)
+    it('calls alert properly on object values', function () {
+      fi.each(testObj, spy)
       const objValues = Object.values(testObj)
       objValues.forEach((val) => { expect(spy).to.have.been.called.with(val) })
+    })
+
+    it('returns the original collection', function () {
+      const result = fi.each(testObj, spy)
       expect(testObj === result).to.equal(true)
       expect(objectsEqual(testObj, result)).to.equal(true)
     })

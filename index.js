@@ -5,6 +5,13 @@ fi = (function() {
     },
 
     each: function() {/*TODO*/},
+
+    map: function() {/*TODO*/},
+
+    reduce: function() {/*TODO*/},
+
+    functions: function() {/*TODO*/},
+
   }
 })()
 

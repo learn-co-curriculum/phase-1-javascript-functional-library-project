@@ -241,6 +241,7 @@ describe('index.js', function () {
     it('runs materially quicker when run on a pre-sorted array', function () {
       const unsortedTime = bench(fi.uniq, 5, [largeUnsortedArr, false], this)
       const sortedTime = bench(fi.uniq, 5, [largeSortedArr, true], this)
+      console.log(unsortedTime, sortedTime)
       expect(sortedTime < (unsortedTime*.75)).to.equal(true)
     })
 
@@ -275,7 +276,7 @@ describe('index.js', function () {
     const mathMethods = Object.getOwnPropertyNames(Math)
     console.log(fi.functions(Math))
 
-    it('makes the function work', function () {
+    it('returns a collection of the names of every method in an object', function () {
       expect(arraysEqual(fi.functions(Math), mathMethods)).to.equal(true)
     })
   })

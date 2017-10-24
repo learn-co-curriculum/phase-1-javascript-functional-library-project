@@ -61,9 +61,39 @@ fi = (function() {
       return (collection instanceof Array) ? collection.length : Object.keys(collection).length
     },
 
-    first: function() {
-      
-    }
+    first: function(collection, stop=false) {
+      return (stop) ? collection.slice(0, stop) : collection[0]
+    },
+
+    last: function(collection, start=false) {
+      return (start) ? collection.slice(collection.length-start, collection.length) : collection[collection.length-1]
+    },
+
+    compact: function(collection) {
+      const badBad = new Set([false, null, 0, "", undefined, NaN])
+      return collection.filter(el => !badBad.has(el))
+    },
+
+    // works like insertion sort
+    iSortLast: function(arr) {
+      let currIdx = arr.length-1
+      while(currIdx > 0 && arr[currIdx-1] > arr[currIdx]) {
+        const temp = arr[currIdx-1]
+        arr[currIdx-1] = arr[currIdx]
+        arr[currIdx] = temp
+        currIdx--
+      }
+    },
+
+    sortBy: function(collection, callback) {
+      const newArr = []
+      for (let val of collection) {
+        newArr.push(callback(val))
+        this.iSortLast(newArr)
+      }
+      console.log("returning: ", newArr)
+      return newArr
+    },
 
     functions: function() {
 

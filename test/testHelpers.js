@@ -18,24 +18,24 @@ function objectsEqual(objA, objB) {
 
 // MODIFIED FROM SO user 'fncomp': https://stackoverflow.com/questions/1003855/howto-benchmark-javascript-code
 function bench(method, iterations, args, context) {
-    var start = 0;
+    var start = 0
     function timer(action) {
-        var currTime = Date.now();
+        var currTime = Date.now()
         if (action === 'start') {
-            start = currTime;
-            return 0;
+            start = currTime
+            return 0
         } else if (action === 'stop') {
-            var elapsed = currTime - start;
-            start = 0;
-            return elapsed;
+            var elapsed = currTime - start
+            start = 0
+            return elapsed
         }
-    };
+    }
 
     timer('start')
     for (let i = 0; i < iterations; i++)
         method.apply(context, args)
     var totalTime = timer('stop')
-    // console.log("Mean execution time was: ", totalTime / parseFloat(iterations));
-    // console.log("Sum execution time was: ", totalTime);
-    return totalTime / parseFloat(iterations);
-};
+    // console.log("Mean execution time was: ", totalTime / parseFloat(iterations))
+    // console.log("Sum execution time was: ", totalTime)
+    return totalTime / parseFloat(iterations)
+}

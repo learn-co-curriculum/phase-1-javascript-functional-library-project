@@ -72,7 +72,7 @@ fi.map({one: 1, two: 2, three: 3}, function(num, key){ return num * 3; });
 Reduce boils down a **collection** of values into a single value. **Acc** (short for accumulator) is the initial state of the reduction, and each successive step of it should be returned by the **iteratee**. The iteratee is passed three arguments: the acc, the value of the iteration, and finally a reference to the entire collection.
 
 ```javascript
-var sum = fi.reduce([1, 2, 3], function(acc, val, collection) { return acc + num; }, 0);
+var sum = fi.reduce([1, 2, 3], function(acc, val, collection) { return acc + val; }, 0);
 => 6
 ```
 

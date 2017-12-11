@@ -14,6 +14,8 @@ Given the same input your functions should always return the same value.
 ## Instructions
 Below you will find a list of function descriptions detailing what their name, parameters and return value should be. Your job is to develop the code to implement these functions.
 
+**PLEASE NOTE** If you see `[ARGUMENT]` in the instructions, that's an indication that a function should expect optional arguments. For example, `fi.first(array, [n])` [n] refers to an optional argument.
+
 The entire fi library should be wrapped in an [Immediately Invoked Function Expression](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) (IIFE), like the example below.
 
 

@@ -5,7 +5,7 @@ Your assignment today is to build the `fi` JS library. This is a toolset of usef
 
 Your functions should conform to the following guidelines:
 
-1. Write pure functions
+1. Write [pure functions](https://en.wikipedia.org/wiki/Pure_function)
 2. Avoid sharing or mutating state
 3. Avoid side effects
 

@@ -5,7 +5,7 @@ Your assignment today is to build the `fi` JS library. This is a toolset of usef
 
 Your functions should conform to the following guidelines:
 
-1. Write pure functions
+1. Write [pure functions](https://en.wikipedia.org/wiki/Pure_function)
 2. Avoid sharing or mutating state
 3. Avoid side effects
 
@@ -13,6 +13,8 @@ Given the same input your functions should always return the same value.
 
 ## Instructions
 Below you will find a list of function descriptions detailing what their name, parameters and return value should be. Your job is to develop the code to implement these functions.
+
+**PLEASE NOTE** If you see `[ARGUMENT]` in the instructions, that's an indication that a function should expect optional arguments. For example, `fi.first(array, [n])` [n] refers to an optional argument.
 
 The entire fi library should be wrapped in an [Immediately Invoked Function Expression](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) (IIFE), like the example below.
 
@@ -72,7 +74,7 @@ fi.map({one: 1, two: 2, three: 3}, function(num, key){ return num * 3; });
 Reduce boils down a **collection** of values into a single value. **Acc** (short for accumulator) is the initial state of the reduction, and each successive step of it should be returned by the **iteratee**. The iteratee is passed three arguments: the acc, the value of the iteration, and finally a reference to the entire collection.
 
 ```javascript
-var sum = fi.reduce([1, 2, 3], function(acc, val, collection) { return acc + num; }, 0);
+var sum = fi.reduce([1, 2, 3], function(acc, val, collection) { return acc + val; }, 0);
 => 6
 ```
 
@@ -239,4 +241,4 @@ fi.functions(fi);
 **fi.giveMeMore**
 
 If you are reading this come to us for more functions assignments.
-`
+

@@ -1,7 +1,12 @@
 # Build a JS functional library
 
 ## Project guidelines
+
 Your assignment today is to build the `fi` JS library. This is a toolset of useful functional programming helpers, following the [functional programming](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0) paradigm.
+
+_NOTE_ You should try to first complete this assignment by testing your functions with the example inputs found in this readme. Open `index.html` in the browser and try to use Chrome's debugging tools. When you've finished, feel free to checkout the `with-tests` branch and test your solution against the tests:
+
+`git checkout with-tests && git pull`
 
 Your functions should conform to the following guidelines:
 
@@ -12,23 +17,25 @@ Your functions should conform to the following guidelines:
 Given the same input your functions should always return the same value.
 
 ## Instructions
+
 Below you will find a list of function descriptions detailing what their name, parameters and return value should be. Your job is to develop the code to implement these functions.
 
 The entire fi library should be wrapped in an [Immediately Invoked Function Expression](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) (IIFE), like the example below.
-
 
 ```javascript
 fi = (function() {
   return {
     libraryMethod: function() {
-      return 'Start by reading https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0'
+      return "Start by reading https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0";
     },
 
-    each: function() {/*TODO*/},
-  }
-})()
+    each: function() {
+      /*TODO*/
+    }
+  };
+})();
 
-fi.libraryMethod()
+fi.libraryMethod();
 ```
 
 More info on the [Module Pattern](https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript)
@@ -50,11 +57,9 @@ fi.each({one: 1, two: 2, three: 3}, alert);
 => alerts each number value in turn and returns the original collection
 ```
 
-
 **fi.map**
 
 `fi.map(collection, iteratee)`
-
 
 Produces a new array of values by mapping each value in **collection** through a transformation function (**iteratee**). The iteratee is passed three arguments: the value, then the index (or key) of the iteration, and finally a reference to the entire collection. **Returns a new collection for chaining without modifying the original.**
 
@@ -125,7 +130,6 @@ fi.first([5, 4, 3, 2, 1], 3);
 => [5, 4, 3]
 ```
 
-
 **fi.last**
 
 `fi.last(array, [n])`
@@ -153,9 +157,9 @@ fi.compact([0, 1, false, 2, '', 3]);
 `fi.sortBy(array, iteratee)`
 
 Returns a sorted copy of **array**, ranked in ascending order by the results of running each value through **iteratee**.
-*The point of this exercise is not to write your own sorting algorithm and you are free to use the native [JS sort](https://www.w3schools.com/js/js_array_sort.asp)*
+_The point of this exercise is not to write your own sorting algorithm and you are free to use the native [JS sort](https://www.w3schools.com/js/js_array_sort.asp)_
 
-*If you would like to go deeper and try to construct your own sorting algorithm this is a great extension. [Here](http://blog.benoitvallon.com/sorting-algorithms-in-javascript/sorting-algorithms-in-javascript-all-the-code/) is a list of sorting algorithms implemented in JS with additional resources *
+_If you would like to go deeper and try to construct your own sorting algorithm this is a great extension. [Here](http://blog.benoitvallon.com/sorting-algorithms-in-javascript/sorting-algorithms-in-javascript-all-the-code/) is a list of sorting algorithms implemented in JS with additional resources _
 
 ```javascript
 fi.sortBy([1, 2, 3, 4, 5, 6], function(num){ return Math.sin(num); });
@@ -166,7 +170,6 @@ var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly',
 fi.sortBy(stooges, function(stooge){ return stooge.name});
 => [{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}];
 ```
-
 
 **fi.flatten (bonus function)**
 
@@ -231,7 +234,6 @@ fi.values({one: 1, two: 2, three: 3});
 Returns a sorted collection of the names of every method in an object — that is to say, the name of every function property of the object.
 
 ```javascript
-
 fi.functions(fi);
 => ["compact", "each", "filter", "find", "first", "functions", "last", "map", "reduce", "size", "sortBy"]
 ```

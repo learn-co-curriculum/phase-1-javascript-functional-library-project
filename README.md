@@ -231,7 +231,7 @@ fi.values({one: 1, two: 2, three: 3});
 
 `fi.functions(object)`
 
-Returns a sorted collection of the names of every method in an object — that is to say, the name of every function property of the object.
+Returns a sorted collection of the names of every function in an object — that is to say, the name of every property whose value is a function.
 
 ```javascript
 fi.functions(fi);

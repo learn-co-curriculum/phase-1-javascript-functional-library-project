@@ -4,7 +4,7 @@
 
 Your assignment today is to build the `fi` JS library. This is a toolset of useful functional programming helpers, following the [functional programming](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0) paradigm.
 
-_NOTE_ You should try to first complete this assignment by testing your functions with the example inputs found in this readme. Open `index.html` in the browser and try to use Chrome's debugging tools. When you've finished, feel free to run `learn` from your terminal. Try doing this BDD first, then run the tests.
+_NOTE_ You should try to first complete this assignment by testing your functions with the example inputs found in this readme. Open `index.html` in the browser and try to use Chrome's debugging tools. When you've finished, feel free to run `learn` from your terminal. Try doing this using BDD first, then run the tests.
 
 Your functions should conform to the following guidelines:
 

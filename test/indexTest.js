@@ -81,11 +81,10 @@ describe('index.js', function () {
     const objB = {b: 'b'}
     const objArr = [{a: 'a'}, objB]
 
-    it('returns true if the value is found', function () {
-      // no reason to think students implementation won't work with reference/value checking but you never know how they are going to structure things
-      expect(fi.find(intArr, findCBGenerator(4))).to.equal(true)
-      expect(fi.find(strArr, findCBGenerator("waychillgoldeneye"))).to.equal(true)
-      expect(fi.find(objArr, findCBGenerator(objB))).to.equal(true)
+    it('returns the value if found', function () {
+      expect(fi.find(intArr, findCBGenerator(4))).to.equal(4)
+      expect(fi.find(strArr, findCBGenerator("waychillgoldeneye"))).to.equal("waychillgoldeneye")
+      expect(fi.find(objArr, findCBGenerator(objB))).to.equal(objB)
     })
 
     it('does not traverse the whole array if the value is found early', function () {
@@ -94,10 +93,10 @@ describe('index.js', function () {
       expect(spy).to.have.been.called.exactly(3)
     })
 
-    it('returns false if the value is not present', function () {
-      expect(fi.find(intArr, findCBGenerator(7))).to.equal(false)
-      expect(fi.find(strArr, findCBGenerator("maxwellisbestmax"))).to.equal(false)
-      expect(fi.find(objArr, findCBGenerator({c: 'c'}))).to.equal(false)
+    it('returns undefined if the value is not present', function () {
+      expect(fi.find(intArr, findCBGenerator(7))).to.equal(undefined)
+      expect(fi.find(strArr, findCBGenerator("maxwellisbestmax"))).to.equal(undefined)
+      expect(fi.find(objArr, findCBGenerator({c: 'c'}))).to.equal(undefined)
     })
 
   })

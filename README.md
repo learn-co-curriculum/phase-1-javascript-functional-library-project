@@ -46,7 +46,7 @@ The point of this exercise is to build your own implementation of [Higher Order 
 
 `fi.each(collection, iteratee)`
 
-Iterates over a **collection** of elements, yielding each in turn to an **iteratee** function. Each invocation of **iteratee** is called with three arguments: (element, index, collection). If **collection** is a JavaScript object, **iteratee**'s arguments will be (value, key, collection). **Returns the original collection for chaining.**
+Iterates over a **collection** of elements, passing each element in turn to an **iteratee** function. Each invocation of **iteratee** is called with three arguments: (element, index, collection). If **collection** is a JavaScript object, **iteratee**'s arguments will be (value, key, collection). **Returns the original collection for chaining.**
 
 ```javascript
 fi.each([1, 2, 3], alert);
@@ -72,7 +72,7 @@ fi.map({one: 1, two: 2, three: 3}, function(num, key){ return num * 3; });
 
 `fi.reduce(collection, iteratee, acc)`
 
-Reduce boils down a **collection** of values into a single value. **Acc** (short for accumulator) is the initial state of the reduction, and each successive step of it should be returned by the **iteratee**. The iteratee is passed three arguments: the acc, the value of the iteration, and finally a reference to the entire collection.
+Reduce boils down a **collection** of values into a single value. **Acc** (short for accumulator) starts as the initial state of the reduction, and with each successive step it should be accumulate the return value of **iteratee**. The iteratee is passed three arguments: the acc, the current value in our iteration (the element in the array), and finally a reference to the entire collection.
 
 ```javascript
 var sum = fi.reduce([1, 2, 3], function(acc, val, collection) { return acc + val; }, 0);

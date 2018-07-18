@@ -44,9 +44,9 @@ The point of this exercise is to build your own implementation of [Higher Order 
 
 **fi.each**
 
-`fi.each(collection, iteratee)`
+`fi.each(collection, callback)`
 
-Iterates over a **collection** of elements, yielding each in turn to an **iteratee** function. Each invocation of **iteratee** is called with three arguments: (element, index, collection). If **collection** is a JavaScript object, **iteratee**'s arguments will be (value, key, collection). **Returns the original collection for chaining.**
+Iterates over a **collection** of elements, passing each element in turn to a **callback** function. Each invocation of **callback** is called with three arguments: (element, index, collection). If **collection** is a JavaScript object, **callback**'s arguments will be (value, key, collection). **Returns the original collection for chaining.**
 
 ```javascript
 fi.each([1, 2, 3], alert);
@@ -57,9 +57,9 @@ fi.each({one: 1, two: 2, three: 3}, alert);
 
 **fi.map**
 
-`fi.map(collection, iteratee)`
+`fi.map(collection, callback)`
 
-Produces a new array of values by mapping each value in **collection** through a transformation function (**iteratee**). The iteratee is passed three arguments: the value, then the index (or key) of the iteration, and finally a reference to the entire collection. **Returns a new collection for chaining without modifying the original.**
+Produces a new array of values by mapping each value in **collection** through a transformation function (**callback**). The callback is passed three arguments: the value, then the index (or key) of the iteration, and finally a reference to the entire collection. **Returns a new collection for chaining without modifying the original.**
 
 ```javascript
 fi.map([1, 2, 3], function(num){ return num * 3; });
@@ -70,9 +70,9 @@ fi.map({one: 1, two: 2, three: 3}, function(num, key){ return num * 3; });
 
 **fi.reduce**
 
-`fi.reduce(collection, iteratee, acc)`
+`fi.reduce(collection, callback, acc)`
 
-Reduce boils down a **collection** of values into a single value. **Acc** (short for accumulator) is the initial state of the reduction, and each successive step of it should be returned by the **iteratee**. The iteratee is passed three arguments: the acc, the value of the iteration, and finally a reference to the entire collection.
+Reduce boils down a **collection** of values into a single value. **Acc** (short for accumulator) starts as the initial state of the reduction, and with each successive step it should be accumulate the return value of **callback**. The callback is passed three arguments: the acc, the current value in our iteration (the element in the array), and finally a reference to the entire collection.
 
 ```javascript
 var sum = fi.reduce([1, 2, 3], function(acc, val, collection) { return acc + val; }, 0);
@@ -152,9 +152,9 @@ fi.compact([0, 1, false, 2, '', 3]);
 
 **fi.sortBy**
 
-`fi.sortBy(array, iteratee)`
+`fi.sortBy(array, callback)`
 
-Returns a sorted copy of **array**, ranked in ascending order by the results of running each value through **iteratee**.
+Returns a sorted copy of **array**, ranked in ascending order by the results of running each value through **callback**.
 _The point of this exercise is not to write your own sorting algorithm and you are free to use the native [JS sort](https://www.w3schools.com/js/js_array_sort.asp)_
 
 _If you would like to go deeper and try to construct your own sorting algorithm this is a great extension. [Here](http://blog.benoitvallon.com/sorting-algorithms-in-javascript/sorting-algorithms-in-javascript-all-the-code/) is a list of sorting algorithms implemented in JS with additional resources _
@@ -186,11 +186,11 @@ fi.flatten([1, [2], [3, [[4]]]], true);
 
 **fi.uniq**
 
-`fi.uniq(array, [isSorted], [iteratee])`
+`fi.uniq(array, [isSorted], [callback])`
 
-Produces a duplicate-free version of the **array**, using _===_ to test object equality. In particular only the first occurrence of each value is kept. If you know in advance that the **array** is sorted, passing _true_ for **isSorted** will run a much faster algorithm. If you want to compute unique items based on a transformation, pass an **iteratee** function.
+Produces a duplicate-free version of the **array**, using _===_ to test object equality. In particular only the first occurrence of each value is kept. If you know in advance that the **array** is sorted, passing _true_ for **isSorted** will run a much faster algorithm. If you want to compute unique items based on a transformation, pass a **callback** function.
 
-Specifically, if the iteratee function returns a value that a previously iteratee run value has also provided, (even if the originals are different), we don't include it in the return array.
+Specifically, if the callback function returns the same value that a previous execution of the callback also returned, (even if the original array's elements are different), we don't include it in the return array.
 
 ```javascript
 fi.uniq([1, 2, 1, 4, 1, 3]);

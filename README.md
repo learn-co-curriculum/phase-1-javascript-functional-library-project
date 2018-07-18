@@ -154,18 +154,19 @@ fi.compact([0, 1, false, 2, '', 3]);
 
 `fi.sortBy(array, callback)`
 
-Returns a sorted copy of **array**, ranked in ascending order by the results of running each value through **callback**.
+Returns a sorted copy of **array**, ranked in ascending order by the results of running each value through **callback**. The values from the original array should be retained within the sorted copy, just in ascending order.  
+
 _The point of this exercise is not to write your own sorting algorithm and you are free to use the native [JS sort](https://www.w3schools.com/js/js_array_sort.asp)_
 
-_If you would like to go deeper and try to construct your own sorting algorithm this is a great extension. [Here](http://blog.benoitvallon.com/sorting-algorithms-in-javascript/sorting-algorithms-in-javascript-all-the-code/) is a list of sorting algorithms implemented in JS with additional resources _
+_If you would like to go deeper and try to construct your own sorting algorithm this is a great extension. [Here](http://blog.benoitvallon.com/sorting-algorithms-in-javascript/sorting-algorithms-in-javascript-all-the-code/) is a list of sorting algorithms implemented in JS with additional resources_
 
 ```javascript
-fi.sortBy([1, 2, 3, 4, 5, 6], function(num){ return Math.sin(num); });
-=> [5, 4, 6, 3, 1, 2]
+fi.sortBy([1, 2, 3, 4, 5, 6], function(num){ return Math.sin(num) });
+=> [5, 4, 6, 3, 1, 2];
 
 
 var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
-fi.sortBy(stooges, function(stooge){ return stooge.name});
+fi.sortBy(stooges, function(stooge){ return stooge.name });
 => [{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}];
 ```
 
@@ -239,4 +240,3 @@ fi.functions(fi);
 **fi.giveMeMore**
 
 If you are reading this come to us for more functions assignments.
-

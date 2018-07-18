@@ -65,6 +65,10 @@ describe('index.js', function () {
       expect(reduceWithAcc).to.equal(40)
     })
 
+    it('returns the correct reduced value when not passed an accumulator', function () {
+      expect(reduceSansAcc).to.equal(30)
+    })
+
     it('does not modify the original array', function () {
       expect(arraysEqual(unmodifiedTestArr, testArr)).to.equal(true)
     })

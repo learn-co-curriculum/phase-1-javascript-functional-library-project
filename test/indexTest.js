@@ -1,3 +1,6 @@
+const chai = require('chai')
+const spies = require('chai-spies-next')
+chai.use(spies)
 const expect = chai.expect
 
 describe('index.js', function () {
@@ -34,9 +37,10 @@ describe('index.js', function () {
     const testObj = Object.assign({}, unmodifiedTestObj)
     const callback = (x) => (x * 3)
 
-    const arrResult = fi.map(testArr, callback)
+
 
     it('successfully returns a correctly populated array', function () {
+      const arrResult = fi.map(testArr, callback)
       expect(arraysEqual([3, 6, 9, 12], arrResult)).to.equal(true);
     })
 
@@ -44,9 +48,10 @@ describe('index.js', function () {
       expect(arraysEqual(testArr, unmodifiedTestArr)).to.equal(true);
     })
 
-    const objResult = fi.map(testObj, callback)
+
 
     it('successfully returns a correctly populated array from modified object values', function () {
+      const objResult = fi.map(testObj, callback)
       expect(arraysEqual([3, 6, 9, 12], objResult)).to.equal(true);
     })
 
@@ -58,14 +63,14 @@ describe('index.js', function () {
   describe('reduce', function () {
     const testArr = unmodifiedTestArr.slice() // arr is [1, 2, 3, 4]
     const callback = (acc, val, collection) => (acc + (val * 3))
-    const reduceSansAcc = fi.reduce(testArr, callback)
-    const reduceWithAcc = fi.reduce(testArr, callback, 10)
 
     it('returns the correct reduced value when passed an accumulator', function () {
+      const reduceWithAcc = fi.reduce(testArr, callback, 10)
       expect(reduceWithAcc).to.equal(40)
     })
 
     it('returns the correct reduced value when not passed an accumulator', function () {
+      const reduceSansAcc = fi.reduce(testArr, callback)
       expect(reduceSansAcc).to.equal(28)
     })
 
@@ -292,3 +297,43 @@ describe('index.js', function () {
   })
 
 })
+
+function arraysEqual(arrA, arrB) {
+  if (arrA.length !== arrB.length) return false
+  for (let idx = 0; idx < arrA.length; idx++) {
+    if (arrA[idx] !== arrB[idx]) {
+
+      if (isNaN(arrA[idx]) && isNaN(arrB[idx])) continue
+      return false
+    }
+  }
+  return true
+}
+
+function objectsEqual(objA, objB) {
+  return (JSON.stringify(objA) === JSON.stringify(objB))
+}
+
+// MODIFIED FROM SO user 'fncomp': https://stackoverflow.com/questions/1003855/howto-benchmark-javascript-code
+function bench(method, iterations, args, context) {
+    var start = 0;
+    function timer(action) {
+        var currTime = Date.now();
+        if (action === 'start') {
+            start = currTime;
+            return 0;
+        } else if (action === 'stop') {
+            var elapsed = currTime - start;
+            start = 0;
+            return elapsed;
+        }
+    };
+
+    timer('start')
+    for (let i = 0; i < iterations; i++)
+        method.apply(context, args)
+    var totalTime = timer('stop')
+    // console.log("Mean execution time was: ", totalTime / parseFloat(iterations));
+    // console.log("Sum execution time was: ", totalTime);
+    return totalTime / parseFloat(iterations);
+};

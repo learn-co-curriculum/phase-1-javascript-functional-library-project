@@ -22,6 +22,8 @@ First, read up on [FP][], and then come back.
 * Pass a callback to a function
 * Identify JavaScript's non-enforcement of arity
 
+## Instructions
+
 Your functions should conform to the following guidelines:
 
 1. Write pure functions (see article)
@@ -29,8 +31,6 @@ Your functions should conform to the following guidelines:
 3. Avoid side effects (see article)
 
 Given the same input your functions should always return the same value.
-
-## Instructions
 
 Below you will find a list of function descriptions detailing what their name,
 parameters and return value should be. Your job is to develop the code to

@@ -289,7 +289,7 @@ many functions can build off of each other. This lab asked you to take on some
 of the basic tasks that you would face when writing a functional library.
 
 Expand your vocabulary by visiting a library like [lodash][] or [ramda][]. Look
-at methods like Ramda's [filter] or [flip][]. Can you imagine how to write
+at methods like Ramda's [filter][] or [flip][]. Can you imagine how to write
 that? These libraries are providing the functionality just like you did too!
 
 You've pushed your skills to a whole new level. Congratulations!
@@ -301,8 +301,8 @@ You've pushed your skills to a whole new level. Congratulations!
 
 [lodash]: https://lodash.com
 [ramda]: https://ramdajs.com/docs/
-[ramda-filter]: https://ramdajs.com/docs/#filter
-[ramda-flip]: https://ramdajs.com/docs/#flip
+[filter]: https://ramdajs.com/docs/#filter
+[flip]: https://ramdajs.com/docs/#flip
 [FP]: https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0
 [IIFE]: (https://en.wikipedia.org/wiki/Immediately-invoked_function_expression)
 [MP]: https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript

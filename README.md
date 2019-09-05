@@ -282,17 +282,27 @@ fi.functions(fi);
 => ["compact", "each", "filter", "find", "first", "functions", "last", "map", "reduce", "size", "sortBy"]
 ```
 
-**fi.giveMeMore**
-
-If you are reading this come to us for more functions assignments. Awesome
-daring!
-
 ## Conclusion
 
-You've pushed your skills to a whole new level. Congratulations. With this
-capability you're able to theorize what's going on inside of several popular
-JavaScript frameworks like "lodash" and even React or Angular. Congratulations!
+Building a functional library is a great experience for learning to see how
+many functions can build off of each other. This lab asked you to take on some
+of the basic tasks that you would face when writing a functional library.
 
+Expand your vocabulary by visiting a library like [lodash][] or [ramda][]. Look
+at methods like Ramda's [filter] or [flip][]. Can you imagine how to write
+that? These libraries are providing the functionality just like you did too!
+
+You've pushed your skills to a whole new level. Congratulations!
+
+## Resources
+
+* [lodash][]
+* [ramda][]
+
+[lodash]: https://lodash.com
+[ramda]: https://ramdajs.com/docs/
+[ramda-filter]: https://ramdajs.com/docs/#filter
+[ramda-flip]: https://ramdajs.com/docs/#flip
 [FP]: https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0
 [IIFE]: (https://en.wikipedia.org/wiki/Immediately-invoked_function_expression)
 [MP]: https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript

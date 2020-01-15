@@ -234,16 +234,29 @@ fi.flatten([1, [2], [3, [[4]]]], true);
 
 `fi.uniq(array, [isSorted], [callback])`
 
-Produces a duplicate-free version of the **array**, using _===_ to test object equality. In particular only the first occurrence of each value is kept. If you know in advance that the **array** is sorted, passing _true_ for **isSorted** will run a much faster algorithm. If you want to compute unique items based on a transformation, pass a **callback** function.
-
-Specifically, if the callback function returns the same value that a previous execution of the callback also returned, (even if the original array's elements are different), we don't include it in the return array.
+Produces a duplicate-free version of the **array**, using _===_ to test object equality. In particular only the first occurrence of each value is kept.
 
 ```javascript
 fi.uniq([1, 2, 1, 4, 1, 3]);
 => [1, 2, 4, 3]
+```
 
+If you know in advance that the **array** is sorted, passing _true_ for **isSorted** will run a much faster algorithm. 
+
+```javascript
+fi.uniq(['a', 'a', 'b', 'c', 'e', 'e', 'e', 'e'], true)
+=> ['a', 'b', 'c', 'e'] // faster than unsorted
+```
+
+If you want to compute unique items based on a transformation, pass a **callback** function.
+
+Specifically, if the callback function returns the same value that a previous execution of the callback also returned, we don't include that item in the return array - even if the original array's elements are different. The output array will be made up of a subset of the values of the original array - not the transformed values.
+
+```javascript
 fi.uniq([1, 2, 3, 6], false, (x => x % 3));
 => [1, 2, 3]
+fi.uniq([4,8,6,5,7], false, (x => x % 3));
+=> [4,8,6]
 ```
 
 ## Function

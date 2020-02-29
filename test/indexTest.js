@@ -64,12 +64,12 @@ describe('index.js', function () {
     const testArr = unmodifiedTestArr.slice() // arr is [1, 2, 3, 4]
     const callback = (acc, val, collection) => (acc + (val * 3))
 
-    it('returns the correct reduced value when passed an accumulator', function () {
+    it('returns the correct reduced value when passed an initial value', function () {
       const reduceWithAcc = fi.reduce(testArr, callback, 10)
       expect(reduceWithAcc).to.equal(40)
     })
 
-    it('returns the correct reduced value when not passed an accumulator', function () {
+    it('returns the correct reduced value when not passed an initial value', function () {
       const reduceSansAcc = fi.reduce(testArr, callback)
       expect(reduceSansAcc).to.equal(28)
     })

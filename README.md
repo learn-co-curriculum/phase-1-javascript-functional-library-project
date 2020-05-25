@@ -317,5 +317,5 @@ You've pushed your skills to a whole new level. Congratulations!
 [filter]: https://ramdajs.com/docs/#filter
 [flip]: https://ramdajs.com/docs/#flip
 [FP]: https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0
-[IIFE]: (https://en.wikipedia.org/wiki/Immediately-invoked_function_expression)
+[IIFE]: https://en.wikipedia.org/wiki/Immediately-invoked_function_expression
 [MP]: https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript

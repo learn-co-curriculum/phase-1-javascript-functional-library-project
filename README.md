@@ -1,4 +1,4 @@
-# JavaScript Advanced Functions: Build a JavaScript Functional Library
+# JavaScript Functional Library Project
 
 ## Introduction
 

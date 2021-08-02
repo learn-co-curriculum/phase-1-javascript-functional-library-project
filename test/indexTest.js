@@ -8,31 +8,31 @@ describe('index.js', function () {
   const unmodifiedTestObj = {one: 1, two: 2, three: 3, four: 4}
 
 
-  describe('each', function () {
+  describe('myEach', function () {
     const alert = chai.spy();
     const testArr = [1, 2, 3, 4]
     const testObj = Object.assign({}, unmodifiedTestObj)
     const spy = chai.spy(x => true)
 
     it('calls alert with each element passed', function () {
-      fi.each(testArr, alert)
+      myEach(testArr, alert)
       expect(alert).to.have.been.called.exactly(testArr.length)
     })
 
     it('calls alert properly on object values', function () {
-      fi.each(testObj, spy)
+      myEach(testObj, spy)
       const objValues = Object.values(testObj)
       objValues.forEach((val) => { expect(spy).to.have.been.called.with(val) })
     })
 
     it('returns the original collection', function () {
-      const result = fi.each(testObj, spy)
+      const result = myEach(testObj, spy)
       expect(testObj === result).to.equal(true)
       expect(objectsEqual(testObj, result)).to.equal(true)
     })
   })
 
-  describe('map', function () {
+  describe('myMap', function () {
     const testArr = unmodifiedTestArr.slice()
     const testObj = Object.assign({}, unmodifiedTestObj)
     const callback = (x) => (x * 3)
@@ -40,7 +40,7 @@ describe('index.js', function () {
 
 
     it('successfully returns a correctly populated array', function () {
-      const arrResult = fi.map(testArr, callback)
+      const arrResult = myMap(testArr, callback)
       expect(arraysEqual([3, 6, 9, 12], arrResult)).to.equal(true);
     })
 
@@ -51,7 +51,7 @@ describe('index.js', function () {
 
 
     it('successfully returns a correctly populated array from modified object values', function () {
-      const objResult = fi.map(testObj, callback)
+      const objResult = myMap(testObj, callback)
       expect(arraysEqual([3, 6, 9, 12], objResult)).to.equal(true);
     })
 
@@ -60,17 +60,17 @@ describe('index.js', function () {
     })
   })
 
-  describe('reduce', function () {
+  describe('myReduce', function () {
     const testArr = unmodifiedTestArr.slice() // arr is [1, 2, 3, 4]
     const callback = (acc, val, collection) => (acc + (val * 3))
 
     it('returns the correct reduced value when passed an initial value', function () {
-      const reduceWithAcc = fi.reduce(testArr, callback, 10)
+      const reduceWithAcc = myReduce(testArr, callback, 10)
       expect(reduceWithAcc).to.equal(40)
     })
 
     it('returns the correct reduced value when not passed an initial value', function () {
-      const reduceSansAcc = fi.reduce(testArr, callback)
+      const reduceSansAcc = myReduce(testArr, callback)
       expect(reduceSansAcc).to.equal(28)
     })
 
@@ -80,7 +80,7 @@ describe('index.js', function () {
 
   })
 
-  describe('find', function() {
+  describe('myFind', function() {
     function findCBGenerator(target) {
       return (function(currEl) { return target === currEl })
     }
@@ -91,26 +91,26 @@ describe('index.js', function () {
     const objArr = [{a: 'a'}, objB]
 
     it('returns the value if found', function () {
-      expect(fi.find(intArr, findCBGenerator(4))).to.equal(4)
-      expect(fi.find(strArr, findCBGenerator("waychillgoldeneye"))).to.equal("waychillgoldeneye")
-      expect(fi.find(objArr, findCBGenerator(objB))).to.equal(objB)
+      expect(myFind(intArr, findCBGenerator(4))).to.equal(4)
+      expect(myFind(strArr, findCBGenerator("waychillgoldeneye"))).to.equal("waychillgoldeneye")
+      expect(myFind(objArr, findCBGenerator(objB))).to.equal(objB)
     })
 
     it('does not traverse the whole array if the value is found early', function () {
       const spy = chai.spy(findCBGenerator(0))
-      fi.find(intArr, spy)
+      myFind(intArr, spy)
       expect(spy).to.have.been.called.exactly(3)
     })
 
     it('returns undefined if the value is not present', function () {
-      expect(fi.find(intArr, findCBGenerator(7))).to.equal(undefined)
-      expect(fi.find(strArr, findCBGenerator("maxwellisbestmax"))).to.equal(undefined)
-      expect(fi.find(objArr, findCBGenerator({c: 'c'}))).to.equal(undefined)
+      expect(myFind(intArr, findCBGenerator(7))).to.equal(undefined)
+      expect(myFind(strArr, findCBGenerator("maxwellisbestmax"))).to.equal(undefined)
+      expect(myFind(objArr, findCBGenerator({c: 'c'}))).to.equal(undefined)
     })
 
   })
 
-  describe('filter', function () {
+  describe('myFilter', function () {
     const testArr = [6, 11, 5, 12, 17, 100, 9, 1, -8]
 
     function excluder(currEl) {
@@ -118,63 +118,63 @@ describe('index.js', function () {
     }
 
     it('correctly filters for values that the callback evaluates as true', function () {
-      const greaterThan10 = fi.filter(testArr, excluder)
+      const greaterThan10 = myFilter(testArr, excluder)
       expect(arraysEqual(greaterThan10, [11, 12, 17, 100])).to.equal(true)
     })
   })
 
-  describe('size', function () {
+  describe('mySize', function () {
     const testArr = unmodifiedTestArr.slice()
     const testObj = Object.assign({}, unmodifiedTestObj)
 
     it('correctly returns the size of the collection when an array is passed', function () {
-      expect(fi.size(testArr)).to.equal(testArr.length)
+      expect(mySize(testArr)).to.equal(testArr.length)
     })
 
     it('correctly returns the size of the collection (amount of keys) when an object is passed', function () {
-      expect(fi.size(testObj)).to.equal(Object.keys(testObj).length)
+      expect(mySize(testObj)).to.equal(Object.keys(testObj).length)
     })
   })
 
-  describe('first', function () {
+  describe('myFirst', function () {
     const testArr = unmodifiedTestArr.slice()
 
     it('returns the first element of the collection', function () {
-      expect(fi.first(testArr)).to.equal(1)
+      expect(myFirst(testArr)).to.equal(1)
     })
 
     it('returns the first n elements of the collection when the second optional argument (n) is provided', function () {
-      expect(arraysEqual(fi.first(testArr, 3), [1, 2, 3])).to.equal(true)
+      expect(arraysEqual(myFirst(testArr, 3), [1, 2, 3])).to.equal(true)
     })
   })
 
-  describe('last', function () {
+  describe('myLast', function () {
     const testArr = unmodifiedTestArr.slice()
 
     it('returns the last element of the collection', function () {
-      expect(fi.last(testArr)).to.equal(4)
+      expect(myLast(testArr)).to.equal(4)
     })
 
     it('returns the last n elements of the collection when the second optional argument (n) is provided', function () {
-      expect(arraysEqual(fi.last(testArr, 3), [2, 3, 4])).to.equal(true)
+      expect(arraysEqual(myLast(testArr, 3), [2, 3, 4])).to.equal(true)
     })
   })
 
-  describe('compact', function () {
+  describe('myCompact', function () {
     const nonsenseArr = [1, 0, 'a', "", "maru", null, "choux", NaN, false, "doge", undefined]
     const justOkArr = [1, 'a', "maru", "choux", "doge"]
 
     it('returns a copy of the **array** with all falsy values removed. In JavaScript, _false_, _null_, _0_, _""_, _undefined_ and _NaN_ are all falsy.', function () {
-      expect(arraysEqual(fi.compact(nonsenseArr), justOkArr)).to.equal(true)
+      expect(arraysEqual(myCompact(nonsenseArr), justOkArr)).to.equal(true)
     })
 
     it('does not modify the original array', function () {
-      fi.compact(nonsenseArr)
+      myCompact(nonsenseArr)
       expect(arraysEqual(nonsenseArr, [1, 0, 'a', "", "maru", null, "choux", NaN, false, "doge", undefined])).to.equal(true)
     })
   })
 
-  describe('sortBy', function () {
+  describe('mySortBy', function () {
     const unsortedIntArr = [3, 8, 5, 1, 9, 11, 8]
     const unsortedStringArr = ["maru", "choux", "doge", "coconut"]
     const unsortedObjArr = [
@@ -197,62 +197,62 @@ describe('index.js', function () {
     function sortObjFunction(obj) { return obj.age }
 
     it('correctly sorts arrays of integers and arrays of strings', function () {
-      expect(arraysEqual(fi.sortBy(unsortedIntArr, sortArrFunction), [1, 3, 5, 8, 8, 9, 11])).to.equal(true)
-      expect(arraysEqual(fi.sortBy(unsortedStringArr, sortArrFunction), ["choux", "coconut", "doge", "maru"])).to.equal(true)
+      expect(arraysEqual(mySortBy(unsortedIntArr, sortArrFunction), [1, 3, 5, 8, 8, 9, 11])).to.equal(true)
+      expect(arraysEqual(mySortBy(unsortedStringArr, sortArrFunction), ["choux", "coconut", "doge", "maru"])).to.equal(true)
     })
 
     it('does not modify the original arrays', function () {
-      fi.sortBy(unsortedIntArr, sortArrFunction)
-      fi.sortBy(unsortedStringArr, sortArrFunction)
+      mySortBy(unsortedIntArr, sortArrFunction)
+      mySortBy(unsortedStringArr, sortArrFunction)
       expect(arraysEqual(unsortedIntArr, [3, 8, 5, 1, 9, 11, 8])).to.equal(true)
       expect(arraysEqual(unsortedStringArr, ["maru", "choux", "doge", "coconut"])).to.equal(true)
     })
 
     it('correctly sorts arrays of integers with non-standard sort', function () {
-      expect(arraysEqual(fi.sortBy([1, 2, 3, 4, 5, 6], sortIntsBySin), [5, 4, 6, 3, 1, 2])).to.equal(true)
+      expect(arraysEqual(mySortBy([1, 2, 3, 4, 5, 6], sortIntsBySin), [5, 4, 6, 3, 1, 2])).to.equal(true)
     })
 
   })
 
-  describe('flatten', function () {
+  describe('myFlatten', function () {
 
     it('correctly flattens a ludicrously nested array', function () {
       const nestedArr = [1, [2, 3], [[4, 5], 6, [7, [8, 9]]]]
-      const flatArr = fi.flatten(nestedArr)
+      const flatArr = myFlatten(nestedArr)
       expect(arraysEqual(flatArr, [1, 2, 3, 4, 5, 6, 7, 8, 9])).to.equal(true)
     })
 
     it('correctly flattens a single level when a second argument of "true" is passed', function () {
       const nestedArr = [1, [2, 3], [[4, 5], 6, [7, [8, 9]]]]
-      const flatArr = fi.flatten(nestedArr, true)
+      const flatArr = myFlatten(nestedArr, true)
       expect(arraysEqual(flatArr, [1, 2, 3, [4, 5], 6, [7, [8, 9]]])).to.equal(true)
     })
 
   })
 
-  describe('uniq', function () {
+  describe('myUniq', function () {
     const objA = {a: 1, b: 2}
     const objB = objA
     const objC = {c: 3, d: 4}
 
     it('removes duplicate values from an array', function () {
-      expect(arraysEqual(fi.uniq([1, 1, 2, 3, 2, 4, 5, 6, 1]), [1, 2, 3, 4, 5, 6])).to.equal(true)
-      expect(arraysEqual(fi.uniq([objA, objC, objB]), [objA, objC])).to.equal(true)
+      expect(arraysEqual(myUniq([1, 1, 2, 3, 2, 4, 5, 6, 1]), [1, 2, 3, 4, 5, 6])).to.equal(true)
+      expect(arraysEqual(myUniq([objA, objC, objB]), [objA, objC])).to.equal(true)
     })
 
     it('removes duplicate values from an array when an iteratee is applied', function () {
-      const newArr = fi.uniq([1, 2, 2, 3, 4, 6, 9], false, (val => val % 3))
+      const newArr = myUniq([1, 2, 2, 3, 4, 6, 9], false, (val => val % 3))
       console.log(newArr)
       expect(arraysEqual(newArr, [1, 2, 3])).to.equal(true)
     })
 
   })
 
-  describe('keys', function () {
+  describe('myKeys', function () {
     const testObj = Object.assign({}, unmodifiedTestObj)
 
     it("retrieves all the names of the object's own enumerable properties", function () {
-      expect(arraysEqual(fi.keys(testObj), Object.keys(unmodifiedTestObj))).to.equal(true)
+      expect(arraysEqual(myKeys(testObj), Object.keys(unmodifiedTestObj))).to.equal(true)
     })
 
     it("does not modify the original object you crazy DOGE!", function () {
@@ -261,32 +261,15 @@ describe('index.js', function () {
 
   })
 
-  describe('values', function () {
+  describe('myValues', function () {
     const testObj = Object.assign({}, unmodifiedTestObj)
 
     it("retrieves all the values of the object's own properties", function () {
-      expect(arraysEqual(fi.values(testObj), Object.values(unmodifiedTestObj))).to.equal(true)
+      expect(arraysEqual(myValues(testObj), Object.values(unmodifiedTestObj))).to.equal(true)
     })
 
     it("does not modify the original object you crazy DOGE!", function () {
       expect(objectsEqual(testObj, unmodifiedTestObj)).to.equal(true)
-    })
-  })
-
-  describe('functions', function () {
-    const testObject = {
-      a: "",
-      z: () => null,
-      p: "",
-      c: () => null,
-      k: () => null,
-    }
-
-    const final = ["c", "k", "z"]
-
-
-    it('returns a sorted collection of the names of every method in an object', function () {
-      expect(arraysEqual(fi.functions(testObject), final)).to.equal(true)
     })
   })
 })
@@ -307,26 +290,26 @@ function objectsEqual(objA, objB) {
   return (JSON.stringify(objA) === JSON.stringify(objB))
 }
 
-// MODIFIED FROM SO user 'fncomp': https://stackoverflow.com/questions/1003855/howto-benchmark-javascript-code
-function bench(method, iterations, args, context) {
-    var start = 0;
-    function timer(action) {
-        var currTime = Date.now();
-        if (action === 'start') {
-            start = currTime;
-            return 0;
-        } else if (action === 'stop') {
-            var elapsed = currTime - start;
-            start = 0;
-            return elapsed;
-        }
-    };
+// // MODIFIED FROM SO user 'fncomp': https://stackoverflow.com/questions/1003855/howto-benchmark-javascript-code
+// function bench(method, iterations, args, context) {
+//     var start = 0;
+//     function timer(action) {
+//         var currTime = Date.now();
+//         if (action === 'start') {
+//             start = currTime;
+//             return 0;
+//         } else if (action === 'stop') {
+//             var elapsed = currTime - start;
+//             start = 0;
+//             return elapsed;
+//         }
+//     };
 
-    timer('start')
-    for (let i = 0; i < iterations; i++)
-        method.apply(context, args)
-    var totalTime = timer('stop')
-    // console.log("Mean execution time was: ", totalTime / parseFloat(iterations));
-    // console.log("Sum execution time was: ", totalTime);
-    return totalTime / parseFloat(iterations);
-};
+//     timer('start')
+//     for (let i = 0; i < iterations; i++)
+//         method.apply(context, args)
+//     var totalTime = timer('stop')
+//     // console.log("Mean execution time was: ", totalTime / parseFloat(iterations));
+//     // console.log("Sum execution time was: ", totalTime);
+//     return totalTime / parseFloat(iterations);
+// };

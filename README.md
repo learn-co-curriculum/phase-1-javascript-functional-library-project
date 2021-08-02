@@ -1,5 +1,13 @@
 # JavaScript Functional Library Project
 
+## Learning Goals
+
+* Define an IIFE: Instantly-Invoked Function Expression
+* Pass data between functions and callbacks
+* Call a callback from within a function
+* Pass a callback to a function
+* Identify JavaScript's non-enforcement of arity
+
 ## Introduction
 
 "Functional programming (FP)" is a style of programming like record-oriented or
@@ -13,14 +21,6 @@ Developers learn new paradigms all the time. Today we're going to practice
 learning a new style of programming and implementing it.
 
 First, read up on [FP][], and then come back.
-
-## Learning Goals
-
-* Define an IIFE: Instantly-Invoked Function Expression
-* Pass data between functions and callbacks
-* Call a callback from within a function
-* Pass a callback to a function
-* Identify JavaScript's non-enforcement of arity
 
 ## Instructions
 
@@ -64,7 +64,7 @@ could build your own collection-processing framework whenever ***you*** want.
 
 ## Collection Functions (Arrays or Objects)
 
-**fi.each**
+### fi.each
 
 `fi.each(collection, callback)`
 
@@ -81,7 +81,7 @@ fi.each({one: 1, two: 2, three: 3}, alert);
 => alerts each number value in turn and returns the original collection
 ```
 
-**fi.map**
+### fi.map
 
 `fi.map(collection, callback)`
 
@@ -98,7 +98,7 @@ fi.map({one: 1, two: 2, three: 3}, function(num, key){ return num * 3; });
 => [3, 6, 9]
 ```
 
-**fi.reduce**
+### fi.reduce
 
 `fi.reduce(collection, callback, acc)`
 
@@ -114,7 +114,7 @@ var sum = fi.reduce([1, 2, 3], function(acc, val, collection) { return acc + val
 => 6
 ```
 
-**fi.find**
+### fi.find
 
 `fi.find(collection, predicate)`
 
@@ -128,7 +128,7 @@ var even = fi.find([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
 => 2
 ```
 
-**fi.filter**
+### fi.filter
 
 `fi.filter(collection, predicate)`
 
@@ -140,7 +140,7 @@ var evens = fi.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; })
 => [2, 4, 6]
 ```
 
-**fi.size**
+### fi.size
 
 `fi.size(collection)`
 
@@ -153,7 +153,7 @@ fi.size({one: 1, two: 2, three: 3});
 
 ## Array Functions
 
-**fi.first**
+### fi.first
 
 `fi.first(array, [n])`
 
@@ -167,7 +167,7 @@ fi.first([5, 4, 3, 2, 1], 3);
 => [5, 4, 3]
 ```
 
-**fi.last**
+### fi.last
 
 `fi.last(array, [n])`
 
@@ -178,7 +178,7 @@ fi.last([5, 4, 3, 2, 1]);
 => 1
 ```
 
-**fi.compact**
+### fi.compact
 
 `fi.compact(array)`
 
@@ -190,7 +190,7 @@ fi.compact([0, 1, false, 2, '', 3]);
 => [1, 2, 3]
 ```
 
-**fi.sortBy**
+### fi.sortBy
 
 `fi.sortBy(array, callback)`
 
@@ -215,7 +215,7 @@ fi.sortBy(stooges, function(stooge){ return stooge.name });
 => [{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}];
 ```
 
-**fi.flatten (bonus function)**
+### fi.flatten (bonus function)
 
 `fi.flatten(array, [shallow])`
 Flattens a nested **array** (the nesting can be to any depth).
@@ -230,7 +230,7 @@ fi.flatten([1, [2], [3, [[4]]]], true);
 => [1, 2, 3, [[4]]];
 ```
 
-**fi.uniq**
+### fi.uniq
 
 `fi.uniq(array, [isSorted], [callback])`
 
@@ -241,7 +241,7 @@ fi.uniq([1, 2, 1, 4, 1, 3]);
 => [1, 2, 4, 3]
 ```
 
-If you know in advance that the **array** is sorted, passing _true_ for **isSorted** will run a much faster algorithm. 
+If you know in advance that the **array** is sorted, passing _true_ for **isSorted** will run a much faster algorithm.
 
 ```javascript
 fi.uniq(['a', 'a', 'b', 'c', 'e', 'e', 'e', 'e'], true)
@@ -263,7 +263,7 @@ fi.uniq([4,8,6,5,7], false, (x => x % 3));
 
 ## Object Functions
 
-**fi.keys**
+### fi.keys
 
 `fi.keys(object)`
 
@@ -274,7 +274,7 @@ fi.keys({one: 1, two: 2, three: 3});
 => ["one", "two", "three"]
 ```
 
-**fi.values**
+### fi.values
 
 `fi.values(object)`
 Return all of the values of the **object**'s own properties.
@@ -284,7 +284,7 @@ fi.values({one: 1, two: 2, three: 3});
 => [1, 2, 3]
 ```
 
-**fi.functions**
+### fi.functions
 
 `fi.functions(object)`
 

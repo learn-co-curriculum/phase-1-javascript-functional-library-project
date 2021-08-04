@@ -62,6 +62,7 @@ describe('index.js', function () {
 
   describe('myReduce', function () {
     const testArr = unmodifiedTestArr.slice() // arr is [1, 2, 3, 4]
+    const testObj = Object.assign({}, unmodifiedTestObj) // obj is {one: 1, two: 2, three: 3, four: 4}
     const callback = (acc, val, collection) => (acc + (val * 3))
 
     it('returns the correct reduced value when passed an initial value', function () {
@@ -76,6 +77,15 @@ describe('index.js', function () {
 
     it('does not modify the original array', function () {
       expect(arraysEqual(unmodifiedTestArr, testArr)).to.equal(true)
+    })
+
+    it('returns the correct reduced value from object values', function () {
+      const objResult = myReduce(testObj, callback)
+      expect(objResult).to.equal(28);
+    })
+
+    it('does not modify the original object', function () {
+      expect(objectsEqual(testObj, unmodifiedTestObj)).to.equal(true)
     })
 
   })
@@ -112,6 +122,7 @@ describe('index.js', function () {
 
   describe('myFilter', function () {
     const testArr = [6, 11, 5, 12, 17, 100, 9, 1, -8]
+    const testObj = { two: 2, three: 3, five: 5, seven: 7}
 
     function excluder(currEl) {
       return (currEl > 10)
@@ -120,6 +131,11 @@ describe('index.js', function () {
     it('correctly filters for values that the callback evaluates as true', function () {
       const greaterThan10 = myFilter(testArr, excluder)
       expect(arraysEqual(greaterThan10, [11, 12, 17, 100])).to.equal(true)
+    })
+
+    it('correctly returns an empty array if no matching values are found', function () {
+      const greaterThan10 = myFilter(testObj, excluder)
+      expect(greaterThan10.length).to.equal(0)
     })
   })
 
@@ -157,20 +173,6 @@ describe('index.js', function () {
 
     it('returns the last n elements of the collection when the second optional argument (n) is provided', function () {
       expect(arraysEqual(myLast(testArr, 3), [2, 3, 4])).to.equal(true)
-    })
-  })
-
-  describe('myCompact', function () {
-    const nonsenseArr = [1, 0, 'a', "", "maru", null, "choux", NaN, false, "doge", undefined]
-    const justOkArr = [1, 'a', "maru", "choux", "doge"]
-
-    it('returns a copy of the **array** with all falsy values removed. In JavaScript, _false_, _null_, _0_, _""_, _undefined_ and _NaN_ are all falsy.', function () {
-      expect(arraysEqual(myCompact(nonsenseArr), justOkArr)).to.equal(true)
-    })
-
-    it('does not modify the original array', function () {
-      myCompact(nonsenseArr)
-      expect(arraysEqual(nonsenseArr, [1, 0, 'a', "", "maru", null, "choux", NaN, false, "doge", undefined])).to.equal(true)
     })
   })
 
@@ -230,24 +232,6 @@ describe('index.js', function () {
 
   })
 
-  describe('myUniq', function () {
-    const objA = {a: 1, b: 2}
-    const objB = objA
-    const objC = {c: 3, d: 4}
-
-    it('removes duplicate values from an array', function () {
-      expect(arraysEqual(myUniq([1, 1, 2, 3, 2, 4, 5, 6, 1]), [1, 2, 3, 4, 5, 6])).to.equal(true)
-      expect(arraysEqual(myUniq([objA, objC, objB]), [objA, objC])).to.equal(true)
-    })
-
-    it('removes duplicate values from an array when an iteratee is applied', function () {
-      const newArr = myUniq([1, 2, 2, 3, 4, 6, 9], false, (val => val % 3))
-      console.log(newArr)
-      expect(arraysEqual(newArr, [1, 2, 3])).to.equal(true)
-    })
-
-  })
-
   describe('myKeys', function () {
     const testObj = Object.assign({}, unmodifiedTestObj)
 
@@ -255,7 +239,7 @@ describe('index.js', function () {
       expect(arraysEqual(myKeys(testObj), Object.keys(unmodifiedTestObj))).to.equal(true)
     })
 
-    it("does not modify the original object you crazy DOGE!", function () {
+    it("does not modify the original object", function () {
       expect(objectsEqual(testObj, unmodifiedTestObj)).to.equal(true)
     })
 
@@ -268,7 +252,7 @@ describe('index.js', function () {
       expect(arraysEqual(myValues(testObj), Object.values(unmodifiedTestObj))).to.equal(true)
     })
 
-    it("does not modify the original object you crazy DOGE!", function () {
+    it("does not modify the original object", function () {
       expect(objectsEqual(testObj, unmodifiedTestObj)).to.equal(true)
     })
   })
@@ -277,9 +261,9 @@ describe('index.js', function () {
 function arraysEqual(arrA, arrB) {
   if (arrA.length !== arrB.length) return false
   for (let idx = 0; idx < arrA.length; idx++) {
-    if (arrA[idx] !== arrB[idx]) {
-
-      if (isNaN(arrA[idx]) && isNaN(arrB[idx])) continue
+    if (Array.isArray(arrA[idx]) && Array.isArray(arrB[idx])) {
+      arraysEqual(arrA[idx], arrB[idx])
+    } else if (arrA[idx] !== arrB[idx]) {
       return false
     }
   }
@@ -289,27 +273,3 @@ function arraysEqual(arrA, arrB) {
 function objectsEqual(objA, objB) {
   return (JSON.stringify(objA) === JSON.stringify(objB))
 }
-
-// // MODIFIED FROM SO user 'fncomp': https://stackoverflow.com/questions/1003855/howto-benchmark-javascript-code
-// function bench(method, iterations, args, context) {
-//     var start = 0;
-//     function timer(action) {
-//         var currTime = Date.now();
-//         if (action === 'start') {
-//             start = currTime;
-//             return 0;
-//         } else if (action === 'stop') {
-//             var elapsed = currTime - start;
-//             start = 0;
-//             return elapsed;
-//         }
-//     };
-
-//     timer('start')
-//     for (let i = 0; i < iterations; i++)
-//         method.apply(context, args)
-//     var totalTime = timer('stop')
-//     // console.log("Mean execution time was: ", totalTime / parseFloat(iterations));
-//     // console.log("Sum execution time was: ", totalTime);
-//     return totalTime / parseFloat(iterations);
-// };

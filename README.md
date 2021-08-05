@@ -38,7 +38,7 @@ distinction between functional programming and other styles of programming.
 ## Instructions
 
 Listed below are function signatures for each of the functions you will need to
-build. Each signature details what the name, arguments, and return value of the
+build. Each signature details what the name, parameters, and return value of the
 function should be. Pay close attention to these requirements as you work your
 way through. There are also some sample function calls provided with their
 expected return values; be sure to use them to test your functions.
@@ -70,7 +70,7 @@ Googling skills to figure out how to do this.
 
 `myEach(collection, callback)`
 
-Argument(s):
+Parameter(s):
 
 - a collection (either an object or an array)
 - a callback function
@@ -82,7 +82,7 @@ Return value:
 Behavior:
 
 Iterates over the collection of elements, passing each element in turn to the
-callback function. Returns the original, unmodified, collection for chaining.
+callback function. Returns the original, unmodified, collection.
 
 Example function calls:
 
@@ -98,7 +98,7 @@ myEach({one: 1, two: 2, three: 3}, alert);
 
 `myMap(collection, callback)`
 
-Argument(s):
+Parameter(s):
 
 - a collection (either an object or an array)
 - a callback function
@@ -110,8 +110,8 @@ Return value:
 Behavior:
 
 Produces a new array of values by mapping each value in `collection` through a
-transformation function, `callback`. Returns the new array for chaining without
-modifying the original.
+transformation function, `callback`. Returns the new array without modifying the
+original.
 
 Example function calls:
 
@@ -127,11 +127,11 @@ myMap({one: 1, two: 2, three: 3}, function(num, key){ return num * 3; });
 
 `myReduce(collection, callback, acc)`
 
-Argument(s):
+Parameter(s):
 
 - a collection (either an object or an array)
 - a callback function
-- a starting value for the accumulator
+- a starting value for the accumulator (optional)
 
 Return value:
 
@@ -149,9 +149,10 @@ The `callback` is passed three arguments: the current value of `acc`, the
 current element/value in our iteration, and a reference to the entire
 collection.
 
-**Hint:** For the case when a start value is not passed in as an argument, think
-about how you'll need to adjust your function to account for the fact that the
-first element of the collection has already been accounted for.
+**Hint:** For the case when a start value for the accumulator is not passed in
+as an argument, think about how you'll need to adjust your function to account
+for the fact that the first element of the collection has already been accounted
+for.
 
 Example function calls:
 
@@ -167,10 +168,10 @@ myReduce({one: 1, two: 2, three: 3}, function(acc, val, collection) { return acc
 
 `myFind(collection, predicate)`
 
-Argument(s):
+Parameter(s):
 
 - a collection (either an object or an array)
-- a predicate (a test that returns `true` or `false`)
+- a predicate (a callback function that returns `true` or `false`)
 
 Return value:
 
@@ -197,10 +198,10 @@ myFind({one: 1, three: 3, four: 4, six: 6}, function(num){ return num % 2 == 0; 
 
 `myFilter(collection, predicate)`
 
-Argument(s):
+Parameter(s):
 
 - a collection (either an object or an array)
-- a predicate (a test that returns `true` or `false`)
+- a predicate (a callback function that returns `true` or `false`)
 
 Return value:
 
@@ -226,7 +227,7 @@ myFilter({one: 1, three: 3, five: 5}, function(num){ return num % 2 == 0; })
 
 `mySize(collection)`
 
-Argument(s):
+Parameter(s):
 
 - a collection (either an object or an array)
 
@@ -254,7 +255,7 @@ mySize([]);
 
 `myFirst(array, [n])`
 
-Argument(s):
+Parameter(s):
 
 - an array
 - an integer (optional)
@@ -281,7 +282,7 @@ myFirst([5, 4, 3, 2, 1], 3);
 
 `myLast(array, [n])`
 
-Argument(s):
+Parameter(s):
 
 - an array
 - an integer (optional)
@@ -308,7 +309,7 @@ myLast([5, 4, 3, 2, 1], 3);
 
 `mySortBy(array, callback)`
 
-Argument(s):
+Parameter(s):
 
 - an array
 - a callback function
@@ -350,7 +351,7 @@ implemented in JS with additional resources.
 
 `myFlatten(array, [shallow], newArr=[])`
 
-Argument(s):
+Parameter(s):
 
 - an array
 - a boolean value (optional)
@@ -388,7 +389,7 @@ function recursively.
 
 `myKeys(object)`
 
-Argument(s):
+Parameter(s):
 
 - an object
 
@@ -411,7 +412,7 @@ myKeys({one: 1, two: 2, three: 3});
 
 `myValues(object)`
 
-Argument(s):
+Parameter(s):
 
 - an object
 

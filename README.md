@@ -1,298 +1,444 @@
 # JavaScript Functional Library Project
 
-## Introduction
-
-"Functional programming (FP)" is a style of programming like record-oriented or
-object-oriented programming. It's very popular in languages that ***LOVE***
-functions, like JavaScript.
-
-Don't get spooked though, we've been guiding you and coaching you all along to
-think in the "FP" mindset.
-
-Developers learn new paradigms all the time. Today we're going to practice
-learning a new style of programming and implementing it.
-
-First, read up on [FP][], and then come back.
-
 ## Learning Goals
 
-* Define an IIFE: Instantly-Invoked Function Expression
-* Pass data between functions and callbacks
-* Call a callback from within a function
-* Pass a callback to a function
-* Identify JavaScript's non-enforcement of arity
+- Gain a greater understanding of JavaScript's built-in collection-processing
+  methods
+- Gain a greater understanding of callback functions
+
+## Introduction
+
+In this lab, you will gain a deeper understanding of JavaScript's built in
+collection-processing methods (`map`, `filter` etc.) by building your own
+implementation of them. You will also have the opportunity to practice using
+callbacks, including calling a callback from within a function, passing a
+callback to a function, and passing data between functions and callbacks.
+
+The programming approach you will be using in this lab is an example of
+***functional programming (FP)***. There is nothing new or different here —
+we've been guiding you all along to think in the "FP" mindset — but you should
+use this as an opportunity to start understanding some important distinctions
+between functional programming and other styles of programming.
+
+A complete understanding of functional programming requires an understanding of
+a number of advanced topics in JavaScript, including **pure functions**, **side
+effects**, and **immutability**. However, at its most basic, FP can be
+understood as a programming style in which data manipulation occurs through
+functions that return the result of the manipulation without modifying the state
+of the original data. This style of programming can be contrasted with
+programming approaches that use **shared state**, in which data is manipulated
+and the results stored in a central location (commonly known as **state**). You
+will learn more about shared state when you get to React in the next phase.
+
+Read through [this blog post about functional programming][FP] before continuing
+with the lab, but don't worry too much if you don't understand everything you
+read. Your goal should be to begin to get a feel for the concepts and for the
+distinction between functional programming and other styles of programming.
 
 ## Instructions
 
-Your functions should conform to the following guidelines:
+Listed below are function signatures for each of the functions you will need to
+build. Each signature details what the name, parameters, and return value of the
+function should be. Pay close attention to these requirements as you work your
+way through. There are also some sample function calls provided with their
+expected return values; be sure to use them to test your functions.
 
-1. Write pure functions (see article)
-2. Avoid sharing or mutating state (see article)
-3. Avoid side effects (see article)
-
-Given the same input your functions should always return the same value.
-
-Below you will find a list of function descriptions detailing what their name,
-parameters and return value should be. Your job is to develop the code to
-implement these functions.
-
-The entire `fi` library should be wrapped in an [Immediately Invoked Function
-Expression][IIFE] (IIFE), like the example below.
-
-```javascript
-fi = (function() {
-  return {
-    libraryMethod: function() {
-      return "Start by reading the article!";
-    },
-
-    each: function() {
-      /*TODO*/
-    }
-  };
-})();
-
-fi.libraryMethod();
-```
-
-Wrapping a library in code is sometimes called "[The Module Pattern][MP]"
+The functions are divided into three categories: array functions, object
+functions, and functions that should work with **either** collection type. Your
+job is to develop the code to implement these functions.
 
 The point of this exercise is to build ***your own implementation*** of the
 collection-processing methods. Don't simply re-use the built-in methods!
 Leverage all you know about callbacks, passing data, etc. to prove that you
 could build your own collection-processing framework whenever ***you*** want.
 
+**Hint:** For the first set of functions, you will need to figure out how to
+make them work with either arrays or objects. There are multiple ways you could
+approach this. One option is to use an `if` statement to determine whether the
+collection is an object or an array and then process the collection accordingly.
+However, this approach would require writing two different versions of your code
+for each function, which doesn't sound very efficient. Another (better) option
+is to determine whether the collection is an object or an array and, if it's an
+object, use a JavaScript `Object` method to create an array that contains the
+object's values. You then only need to write code that processes an array,
+regardless of what data structure is passed in to your function. Use your
+Googling skills to figure out how to do this.
+
 ## Collection Functions (Arrays or Objects)
 
-**fi.each**
+### myEach
 
-`fi.each(collection, callback)`
+`myEach(collection, callback)`
 
-Iterates over a **collection** of elements, passing each element in turn to a
-**callback** function. Each invocation of **callback** is called with three
-arguments: (element, index, collection). If **collection** is a JavaScript
-object, **callback**'s arguments will be (value, key, collection). **Returns
-the original collection for chaining.**
+Parameter(s):
+
+- a collection (either an object or an array)
+- a callback function
+
+Return value:
+
+- The original collection
+
+Behavior:
+
+Iterates over the collection of elements, passing each element in turn to the
+callback function. Returns the original, unmodified, collection.
+
+Example function calls:
 
 ```javascript
-fi.each([1, 2, 3], alert);
+myEach([1, 2, 3], alert);
 => alerts each number in turn and returns the original collection
-fi.each({one: 1, two: 2, three: 3}, alert);
+
+myEach({one: 1, two: 2, three: 3}, alert);
 => alerts each number value in turn and returns the original collection
 ```
 
-**fi.map**
+### myMap
 
-`fi.map(collection, callback)`
+`myMap(collection, callback)`
 
-Produces a new array of values by mapping each value in **collection** through
-a transformation function (**callback**). The callback is passed three
-arguments: the value, then the index (or key) of the iteration, and finally a
-reference to the entire collection. **Returns a new collection for chaining
-without modifying the original.**
+Parameter(s):
+
+- a collection (either an object or an array)
+- a callback function
+
+Return value:
+
+- A new array
+
+Behavior:
+
+Produces a new array of values by mapping each value in `collection` through a
+transformation function, `callback`. Returns the new array without modifying the
+original.
+
+Example function calls:
 
 ```javascript
-fi.map([1, 2, 3], function(num){ return num * 3; });
+myMap([1, 2, 3], function(num){ return num * 3; });
 => [3, 6, 9]
-fi.map({one: 1, two: 2, three: 3}, function(num, key){ return num * 3; });
+
+myMap({one: 1, two: 2, three: 3}, function(num, key){ return num * 3; });
 => [3, 6, 9]
 ```
 
-**fi.reduce**
+### myReduce
 
-`fi.reduce(collection, callback, acc)`
+`myReduce(collection, callback, acc)`
 
-Reduce boils down a **collection** of values into a single value. **Acc**
-(short for accumulator) starts as the initial state of the reduction, and with
-each successive step it should be accumulate the return value of **callback**.
-The callback is passed three arguments: the acc, the current value in our
-iteration (the element in the array), and finally a reference to the entire
+Parameter(s):
+
+- a collection (either an object or an array)
+- a callback function
+- a starting value for the accumulator (optional)
+
+Return value:
+
+- A single value
+
+Behavior:
+
+Reduce iterates through a `collection` of values and boils it down into a single
+value. `acc` (short for accumulator) starts at the value that's passed in as an
+argument, and with each successive step is updated to the return value of
+`callback`. If a start value is not passed to `myReduce`, the first value in
+the collection should be used as the start value.
+
+The `callback` is passed three arguments: the current value of `acc`, the
+current element/value in our iteration, and a reference to the entire
 collection.
 
+**Hint:** For the case when a start value for the accumulator is not passed in
+as an argument, think about how you'll need to adjust your function to account
+for the fact that the first element of the collection has already been accounted
+for.
+
+Example function calls:
+
 ```javascript
-var sum = fi.reduce([1, 2, 3], function(acc, val, collection) { return acc + val; }, 0);
+myReduce([1, 2, 3], function(acc, val, collection) { return acc + val; }, 10);
+=> 16
+
+myReduce({one: 1, two: 2, three: 3}, function(acc, val, collection) { return acc + val; });
 => 6
 ```
 
-**fi.find**
+### myFind
 
-`fi.find(collection, predicate)`
+`myFind(collection, predicate)`
 
-Looks through each value in the **collection**, returning the first one that
-passes a truth test (**predicate**), or undefined if no value passes the test.
-The function returns as soon as it finds an acceptable element, and doesn't
-traverse the entire collection.
+Parameter(s):
+
+- a collection (either an object or an array)
+- a predicate (a callback function that returns `true` or `false`)
+
+Return value:
+
+- A single value
+
+Behavior:
+
+Looks through each value in the `collection`, returning the first one that
+passes a truth test (`predicate`) or undefined if no value passes the test. The
+function should return as soon as it finds an acceptable element, without
+traversing the rest of the collection.
+
+Example function calls:
 
 ```javascript
-var even = fi.find([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
+myFind([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
 => 2
+
+myFind({one: 1, three: 3, four: 4, six: 6}, function(num){ return num % 2 == 0; });
+=> 4
 ```
 
-**fi.filter**
+### myFilter
 
-`fi.filter(collection, predicate)`
+`myFilter(collection, predicate)`
 
-Looks through each value in the **collection**, returning an array of all the
-values that pass a truth test (**predicate**).
+Parameter(s):
+
+- a collection (either an object or an array)
+- a predicate (a callback function that returns `true` or `false`)
+
+Return value:
+
+- An array
+
+Behavior:
+
+Looks through each value in the `collection`, returning an array of all the
+values that pass a truth test (`predicate`). If no matching values are found, it
+should return an empty array.
+
+Example function call:
 
 ```javascript
-var evens = fi.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
+myFilter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });
 => [2, 4, 6]
+
+myFilter({one: 1, three: 3, five: 5}, function(num){ return num % 2 == 0; })
+=> []
 ```
 
-**fi.size**
+### mySize
 
-`fi.size(collection)`
+`mySize(collection)`
 
-Return the number of values in the **collection**.
+Parameter(s):
+
+- a collection (either an object or an array)
+
+Return value:
+
+- An integer
+
+Behavior:
+
+Return the number of values in the `collection`.
+
+Example function calls:
 
 ```javascript
-fi.size({one: 1, two: 2, three: 3});
+mySize({one: 1, two: 2, three: 3});
 => 3
+
+mySize([]);
+=> 0
 ```
 
 ## Array Functions
 
-**fi.first**
+### myFirst
 
-`fi.first(array, [n])`
+`myFirst(array, [n])`
 
-Returns the first element of an **array**. Passing **n** will return the first **n** elements of the array.
+Parameter(s):
+
+- an array
+- an integer (optional)
+
+Return value:
+
+- A single element **OR** an array
+
+Behavior:
+
+Returns the first element of an `array`. Passing `n` will return the first **n** elements of the array.
+
+Example function calls:
 
 ```javascript
-fi.first([5, 4, 3, 2, 1]);
+myFirst([5, 4, 3, 2, 1]);
 => 5
 
-fi.first([5, 4, 3, 2, 1], 3);
+myFirst([5, 4, 3, 2, 1], 3);
 => [5, 4, 3]
 ```
 
-**fi.last**
+### myLast
 
-`fi.last(array, [n])`
+`myLast(array, [n])`
 
-Returns the last element of an **array**. Passing **n** will return the last **n** elements of the array.
+Parameter(s):
+
+- an array
+- an integer (optional)
+
+Return value:
+
+- A single element **OR** an array
+
+Behavior:
+
+Returns the last element of an `array`. Passing `n` will return the last **n** elements of the array.
+
+Example function calls:
 
 ```javascript
-fi.last([5, 4, 3, 2, 1]);
+myLast([5, 4, 3, 2, 1]);
 => 1
+
+myLast([5, 4, 3, 2, 1], 3);
+=> [3, 2, 1]
 ```
 
-**fi.compact**
+### BONUS: mySortBy
 
-`fi.compact(array)`
+**Note**: Coding the `mySortBy` function is optional for this lab, so the tests
+for it have been disabled. You are free to skip it, but if you'd like to
+complete this additional challenge, simply un-comment out the relevant test code
+in `test/indexTest.js`.
 
-Returns a copy of the **array** with all falsy values removed. In JavaScript,
-_false_, _null_, _0_, _""_, _undefined_ and _NaN_ are all falsy.
+`mySortBy(array, callback)`
+
+Parameter(s):
+
+- an array
+- a callback function
+
+Return value:
+
+- A new array
+
+Behavior:
+
+Returns a sorted copy of `array`, ranked in ascending order by the results of
+running each value through `callback`. The **values from the original array**
+(not the transformed values) should be returned in the sorted copy, in
+ascending order by the value returned by `callback`.
+
+**Note:** The point of this exercise is not to write your own sorting algorithm
+and you are free to use the native [JS
+sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#sorting_non-ascii_characters).
+You **will**, however, need to construct your `compareFunction` (see the
+documentation) so that it will handle either numeric or string values.
+
+Example function calls:
 
 ```javascript
-fi.compact([0, 1, false, 2, '', 3]);
-=> [1, 2, 3]
-```
-
-**fi.sortBy**
-
-`fi.sortBy(array, callback)`
-
-Returns a sorted copy of **array**, ranked in ascending order by the results of
-running each value through **callback**. The values from the original array
-should be retained within the sorted copy, just in ascending order.  
-
-_The point of this exercise is not to write your own sorting algorithm and you are free to use the native [JS sort](https://www.w3schools.com/js/js_array_sort.asp)_
-
-_If you would like to go deeper and try to construct your own sorting algorithm
-this is a great extension.
-[Here](http://blog.benoitvallon.com/sorting-algorithms-in-javascript/sorting-algorithms-in-javascript-all-the-code/)
-is a list of sorting algorithms implemented in JS with additional resources_
-
-```javascript
-fi.sortBy([1, 2, 3, 4, 5, 6], function(num){ return Math.sin(num) });
+mySortBy([1, 2, 3, 4, 5, 6], function(num){ return Math.sin(num) });
 => [5, 4, 6, 3, 1, 2];
 
-
-var stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
-fi.sortBy(stooges, function(stooge){ return stooge.name });
+const stooges = [{name: 'moe', age: 40}, {name: 'larry', age: 50}, {name: 'curly', age: 60}];
+mySortBy(stooges, function(stooge){ return stooge.name });
 => [{name: 'curly', age: 60}, {name: 'larry', age: 50}, {name: 'moe', age: 40}];
 ```
 
-**fi.flatten (bonus function)**
+**BONUS:** If you would like to go deeper and try to construct your own sorting
+algorithm, this is a great extension. Check out this list of [sorting
+algorithms](http://blog.benoitvallon.com/sorting-algorithms-in-javascript/sorting-algorithms-in-javascript-all-the-code/)
+implemented in JS with additional resources.
 
-`fi.flatten(array, [shallow])`
-Flattens a nested **array** (the nesting can be to any depth).
+### BONUS: myFlatten
 
-If you pass **true** for the second argument, the array will only be flattened a single level.
+**Note**: Coding the `myFlatten` function is optional for this lab, so the tests
+for it have been disabled. You are free to skip it, but if you'd like to
+complete this additional challenge, simply un-comment out the relevant test
+code in `test/indexTest.js`.
+
+`myFlatten(array, [shallow], newArr=[])`
+
+Parameter(s):
+
+- an array
+- a boolean value (optional)
+- a new array (with an assigned default value of an empty array) that will
+  contain the flattened elements
+
+Return value:
+
+- The new array
+
+Behavior:
+
+Flattens a nested `array` (the nesting can be to any depth).
+
+If you pass `true` for the second argument, the array will only be flattened a single level.
+
+Example function calls:
 
 ```javascript
-fi.flatten([1, [2], [3, [[4]]]]);
+myFlatten([1, [2], [3, [[4]]]]);
 => [1, 2, 3, 4];
 
-fi.flatten([1, [2], [3, [[4]]]], true);
+myFlatten([1, [2], [3, [[4]]]], true);
 => [1, 2, 3, [[4]]];
 ```
 
-**fi.uniq**
-
-`fi.uniq(array, [isSorted], [callback])`
-
-Produces a duplicate-free version of the **array**, using _===_ to test object equality. In particular only the first occurrence of each value is kept.
-
-```javascript
-fi.uniq([1, 2, 1, 4, 1, 3]);
-=> [1, 2, 4, 3]
-```
-
-If you know in advance that the **array** is sorted, passing _true_ for **isSorted** will run a much faster algorithm. 
-
-```javascript
-fi.uniq(['a', 'a', 'b', 'c', 'e', 'e', 'e', 'e'], true)
-=> ['a', 'b', 'c', 'e'] // faster than unsorted
-```
-
-If you want to compute unique items based on a transformation, pass a **callback** function.
-
-Specifically, if the callback function returns the same value that a previous execution of the callback also returned, we don't include that item in the return array - even if the original array's elements are different. The output array will be made up of a subset of the values of the original array - not the transformed values.
-
-```javascript
-fi.uniq([1, 2, 3, 6], false, (x => x % 3));
-=> [1, 2, 3]
-fi.uniq([4,8,6,5,7], false, (x => x % 3));
-=> [4,8,6]
-```
-
-## Function
+**Hint:** This one is challenging! You will need to use recursion to make this
+work for the multi-level case. Think about why we need that third argument here.
+Also think about how to handle the two optional arguments when you call the
+function recursively.
 
 ## Object Functions
 
-**fi.keys**
+### myKeys
 
-`fi.keys(object)`
+`myKeys(object)`
 
-Retrieve all the names of the **object**'s own enumerable properties.
+Parameter(s):
+
+- an object
+
+Return value:
+
+- An array
+
+Behavior:
+
+Retrieve all the names of the `object`'s enumerable properties.
+
+Example function call:
 
 ```javascript
-fi.keys({one: 1, two: 2, three: 3});
+myKeys({one: 1, two: 2, three: 3});
 => ["one", "two", "three"]
 ```
 
-**fi.values**
+### myValues
 
-`fi.values(object)`
-Return all of the values of the **object**'s own properties.
+`myValues(object)`
+
+Parameter(s):
+
+- an object
+
+Return value:
+
+- an array
+
+Behavior:
+
+Return all of the values of the `object`'s properties.
+
+Example function call:
 
 ```javascript
-fi.values({one: 1, two: 2, three: 3});
+myValues({one: 1, two: 2, three: 3});
 => [1, 2, 3]
-```
-
-**fi.functions**
-
-`fi.functions(object)`
-
-Returns a sorted collection of the names of every function in an object — that is to say, the name of every property whose value is a function.
-
-```javascript
-fi.functions(fi);
-=> ["compact", "each", "filter", "find", "first", "functions", "last", "map", "reduce", "size", "sortBy"]
 ```
 
 ## Conclusion
@@ -303,19 +449,17 @@ of the basic tasks that you would face when writing a functional library.
 
 Expand your vocabulary by visiting a library like [lodash][] or [ramda][]. Look
 at methods like Ramda's [filter][] or [flip][]. Can you imagine how to write
-that? These libraries are providing the functionality just like you did too!
+that? These libraries are providing the functionality just like you did!
 
 You've pushed your skills to a whole new level. Congratulations!
 
 ## Resources
 
-* [lodash][]
-* [ramda][]
+- [lodash][]
+- [ramda][]
 
 [lodash]: https://lodash.com
 [ramda]: https://ramdajs.com/docs/
 [filter]: https://ramdajs.com/docs/#filter
 [flip]: https://ramdajs.com/docs/#flip
 [FP]: https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0
-[IIFE]: https://en.wikipedia.org/wiki/Immediately-invoked_function_expression
-[MP]: https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript

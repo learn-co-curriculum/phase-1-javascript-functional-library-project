@@ -37,7 +37,8 @@ const myReduce = function(collection, callback, acc) {
   // The if statement below handles the case where no start value is passed in 
   // for the accumulator
   // If acc is null, it is set equal to the first value in newCollection
-  // That first value is then sliced out of newCollection
+  // That first value is then sliced out of newCollection since it has already
+  // been accounted for
   if (!acc) {
     acc = newCollection[0];
     newCollection = newCollection.slice(1);
@@ -102,7 +103,7 @@ const mySortBy = function(arr, callback) {
   });
 }
 
-// 'unpack' is a helper function that is used for the case when shallow is true
+// unpack is a helper function for myFlatten that is used when shallow is true
 // It takes each element of the input array (whether it's a primitive value or
 // an array) and pushes it into the output array
 const unpack = function(receiver, arr) {

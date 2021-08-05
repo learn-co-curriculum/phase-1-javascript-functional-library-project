@@ -305,7 +305,12 @@ myLast([5, 4, 3, 2, 1], 3);
 => [3, 2, 1]
 ```
 
-### mySortBy
+### BONUS: mySortBy
+
+**Note**: Coding the `mySortBy` function is optional for this lab, so the tests
+for it have been disabled. You are free to skip it, but if you'd like to
+complete this additional challenge, simply un-comment out the relevant test code
+in `test/indexTest.js`.
 
 `mySortBy(array, callback)`
 
@@ -347,7 +352,12 @@ algorithm, this is a great extension. Check out this list of [sorting
 algorithms](http://blog.benoitvallon.com/sorting-algorithms-in-javascript/sorting-algorithms-in-javascript-all-the-code/)
 implemented in JS with additional resources.
 
-### myFlatten
+### BONUS: myFlatten
+
+**Note**: Coding the `myFlatten` function is optional for this lab, so the tests
+for it have been disabled. You are free to skip it, but if you'd like to
+complete this additional challenge, simply un-comment out the relevant test
+code in `test/indexTest.js`.
 
 `myFlatten(array, [shallow], newArr=[])`
 

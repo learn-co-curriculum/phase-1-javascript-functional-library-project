@@ -99,7 +99,6 @@ const mySortBy = function(arr, callback) {
     } else {
       return 0;
     }
-    end
   });
 }
 

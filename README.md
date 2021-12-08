@@ -266,7 +266,8 @@ Return value:
 
 Behavior:
 
-Returns the first element of an `array`. Passing `n` will return the first **n** elements of the array.
+Returns the first element of an `array`. Passing `n` will return the first **n**
+elements of the array.
 
 Example function calls:
 
@@ -293,7 +294,8 @@ Return value:
 
 Behavior:
 
-Returns the last element of an `array`. Passing `n` will return the last **n** elements of the array.
+Returns the last element of an `array`. Passing `n` will return the last **n**
+elements of the array.
 
 Example function calls:
 
@@ -376,7 +378,8 @@ Behavior:
 
 Flattens a nested `array` (the nesting can be to any depth).
 
-If you pass `true` for the second argument, the array will only be flattened a single level.
+If you pass `true` for the second argument, the array will only be flattened a
+single level.
 
 Example function calls:
 

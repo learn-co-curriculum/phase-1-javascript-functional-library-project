@@ -1,0 +1,396 @@
+{
+  "stats": {
+    "suites": 11,
+    "tests": 27,
+    "passes": 27,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-04-14T19:53:35.769Z",
+    "end": "2022-04-14T19:53:36.758Z",
+    "duration": 989
+  },
+  "tests": [
+    {
+      "title": "calls alert with each element passed",
+      "fullTitle": "index.js myEach calls alert with each element passed",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "calls alert properly on object values",
+      "fullTitle": "index.js myEach calls alert properly on object values",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the original collection",
+      "fullTitle": "index.js myEach returns the original collection",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "successfully returns a correctly populated array",
+      "fullTitle": "index.js myMap successfully returns a correctly populated array",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "does not modify the original array",
+      "fullTitle": "index.js myMap does not modify the original array",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "successfully returns a correctly populated array from modified object values",
+      "fullTitle": "index.js myMap successfully returns a correctly populated array from modified object values",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "does not modify the original object",
+      "fullTitle": "index.js myMap does not modify the original object",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the correct reduced value when passed an initial value",
+      "fullTitle": "index.js myReduce returns the correct reduced value when passed an initial value",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the correct reduced value when not passed an initial value",
+      "fullTitle": "index.js myReduce returns the correct reduced value when not passed an initial value",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "does not modify the original array",
+      "fullTitle": "index.js myReduce does not modify the original array",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the correct reduced value from object values",
+      "fullTitle": "index.js myReduce returns the correct reduced value from object values",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "does not modify the original object",
+      "fullTitle": "index.js myReduce does not modify the original object",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the value if found",
+      "fullTitle": "index.js myFind returns the value if found",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "does not traverse the whole array if the value is found early",
+      "fullTitle": "index.js myFind does not traverse the whole array if the value is found early",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns undefined if the value is not present",
+      "fullTitle": "index.js myFind returns undefined if the value is not present",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "correctly filters for values that the callback evaluates as true",
+      "fullTitle": "index.js myFilter correctly filters for values that the callback evaluates as true",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "correctly returns an empty array if no matching values are found",
+      "fullTitle": "index.js myFilter correctly returns an empty array if no matching values are found",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "correctly returns the size of the collection when an array is passed",
+      "fullTitle": "index.js mySize correctly returns the size of the collection when an array is passed",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "correctly returns the size of the collection (amount of keys) when an object is passed",
+      "fullTitle": "index.js mySize correctly returns the size of the collection (amount of keys) when an object is passed",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the first element of the collection",
+      "fullTitle": "index.js myFirst returns the first element of the collection",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the first n elements of the collection when the second optional argument (n) is provided",
+      "fullTitle": "index.js myFirst returns the first n elements of the collection when the second optional argument (n) is provided",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the last element of the collection",
+      "fullTitle": "index.js myLast returns the last element of the collection",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the last n elements of the collection when the second optional argument (n) is provided",
+      "fullTitle": "index.js myLast returns the last n elements of the collection when the second optional argument (n) is provided",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "retrieves all the names of the object's own enumerable properties",
+      "fullTitle": "index.js myKeys retrieves all the names of the object's own enumerable properties",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "does not modify the original object",
+      "fullTitle": "index.js myKeys does not modify the original object",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "retrieves all the values of the object's own properties",
+      "fullTitle": "index.js myValues retrieves all the values of the object's own properties",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "does not modify the original object",
+      "fullTitle": "index.js myValues does not modify the original object",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    }
+  ],
+  "pending": [],
+  "failures": [],
+  "passes": [
+    {
+      "title": "calls alert with each element passed",
+      "fullTitle": "index.js myEach calls alert with each element passed",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "calls alert properly on object values",
+      "fullTitle": "index.js myEach calls alert properly on object values",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the original collection",
+      "fullTitle": "index.js myEach returns the original collection",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "successfully returns a correctly populated array",
+      "fullTitle": "index.js myMap successfully returns a correctly populated array",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "does not modify the original array",
+      "fullTitle": "index.js myMap does not modify the original array",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "successfully returns a correctly populated array from modified object values",
+      "fullTitle": "index.js myMap successfully returns a correctly populated array from modified object values",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "does not modify the original object",
+      "fullTitle": "index.js myMap does not modify the original object",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the correct reduced value when passed an initial value",
+      "fullTitle": "index.js myReduce returns the correct reduced value when passed an initial value",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the correct reduced value when not passed an initial value",
+      "fullTitle": "index.js myReduce returns the correct reduced value when not passed an initial value",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "does not modify the original array",
+      "fullTitle": "index.js myReduce does not modify the original array",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the correct reduced value from object values",
+      "fullTitle": "index.js myReduce returns the correct reduced value from object values",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "does not modify the original object",
+      "fullTitle": "index.js myReduce does not modify the original object",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the value if found",
+      "fullTitle": "index.js myFind returns the value if found",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "does not traverse the whole array if the value is found early",
+      "fullTitle": "index.js myFind does not traverse the whole array if the value is found early",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns undefined if the value is not present",
+      "fullTitle": "index.js myFind returns undefined if the value is not present",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "correctly filters for values that the callback evaluates as true",
+      "fullTitle": "index.js myFilter correctly filters for values that the callback evaluates as true",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "correctly returns an empty array if no matching values are found",
+      "fullTitle": "index.js myFilter correctly returns an empty array if no matching values are found",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "correctly returns the size of the collection when an array is passed",
+      "fullTitle": "index.js mySize correctly returns the size of the collection when an array is passed",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "correctly returns the size of the collection (amount of keys) when an object is passed",
+      "fullTitle": "index.js mySize correctly returns the size of the collection (amount of keys) when an object is passed",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the first element of the collection",
+      "fullTitle": "index.js myFirst returns the first element of the collection",
+      "duration": 1,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the first n elements of the collection when the second optional argument (n) is provided",
+      "fullTitle": "index.js myFirst returns the first n elements of the collection when the second optional argument (n) is provided",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the last element of the collection",
+      "fullTitle": "index.js myLast returns the last element of the collection",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "returns the last n elements of the collection when the second optional argument (n) is provided",
+      "fullTitle": "index.js myLast returns the last n elements of the collection when the second optional argument (n) is provided",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "retrieves all the names of the object's own enumerable properties",
+      "fullTitle": "index.js myKeys retrieves all the names of the object's own enumerable properties",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "does not modify the original object",
+      "fullTitle": "index.js myKeys does not modify the original object",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "retrieves all the values of the object's own properties",
+      "fullTitle": "index.js myValues retrieves all the values of the object's own properties",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "does not modify the original object",
+      "fullTitle": "index.js myValues does not modify the original object",
+      "duration": 0,
+      "currentRetry": 0,
+      "err": {}
+    }
+  ]
+}
